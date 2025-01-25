@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Peter Lager">
+  <meta name="generator" content="Hugo 0.122.0">
+  <title>Turtle Graphihcs User Guide</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <!-- Custom styles for this template -->
+  <link href="guide.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <main class="d-flex flex-nowrap">
+    <div class="col-2 flex-shrink-0 p-3 scrollarea">
+
+      <!-- ####################################################
+           ############### TURTLE GRAPHICS   ##################
+           ####################################################
+           -->
+
+      <a href="/" class="d-flex align-items-center pb-3 link-body-emphasis text-decoration-none">
+        <span class="fs-4 fw-semibold">Turtle Graphics</span>
+      </a>
+      <div class="b-divider b-hr mb-3" style="height: 0.25rem;"></div>
+
+      <!--  ############### Introduction   -->
+      <ul class="list-unstyled ps-0">
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#intro-collapse" aria-expanded="true">
+            Introduction
+          </button>
+          <div class="collapse show" id="intro-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#overview" class="idx-text-link">Overview</a> </li>
+              <li><a href="#firstturtle" class="idx-text-link">Getting started</a> </li>
+            </ul>
+          </div>
+        </li>
+
+        <div class="b-divider b-hr"></div>
+
+
+        <!-- ####################################################
+             ###############       TASKS       ##################
+             ####################################################
+             -->
+        <span class="fs-5 fw-semibold">Tasks</span>
+        <!--  ############### Move and draw   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#move-collapse" aria-expanded="false">
+            Move and draw
+          </button>
+          <div class="collapse" id="move-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#xy" class="idx-code-link">x()</a></li>
+              <li><a href="#xy" class="idx-code-link">y()</a></li>
+              <li><a href="#xy" class="idx-code-link">xy()</a></li>
+              <li><a href="#dxy" class="idx-code-link">dxy()</a></li>
+              <li><a href="#face" class="idx-code-link">face()</a></li>
+              <li><a href="#forward" class="idx-code-link">forward() fd()</a></li>
+              <li><a href="#backward" class="idx-code-link">backward() back() bk()</a></li>
+              <li><a href="#left" class="idx-code-link">left() lt()</a></li>
+              <li><a href="#right" class="idx-code-link">right() rt()</a></li>
+              <li><a href="#heading" class="idx-code-link">heading() head()</a>
+              <li><a href="#home" class="idx-code-link">home()</a>
+              <li><a href="#goto" class="idx-code-link">goto()</a></li>
+              <li><a href="#goby" class="idx-code-link">goby()</a></li>
+              <li><a href="#dot" class="idx-code-link">dot()</a></li>
+              <li><a href="#arrow" class="idx-code-link">arrow()</a></li>
+              <li><a href="#circle" class="idx-code-link">circle() oval()</a></li>
+              <li><a href="#sleep" class="idx-code-link">sleep()</a></li>
+              <li><a href="#write" class="idx-code-link">write()</a></li>
+              <li><a href="#font" class="idx-code-link">font()</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Pen control   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#pen-control-collapse" aria-expanded="false">
+            Pen control
+          </button>
+          <div class="collapse" id="pen-control-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#up" class="idx-code-link">penup() pu() up()</a> </li>
+              <li><a href="#down" class="idx-code-link">pendown() pd() down()</a></li>
+              <li><a href="#pensize" class="idx-code-link">pensize()</a></li>
+              <li><a href="#dash" class="idx-code-link">pendash() dash()</a></li>
+              <li><a href="#pencap" class="idx-code-link">pencap() cap()</a></li>
+              <li><a href="#pencolor" class="idx-code-link">pencolor()</a></li>
+              <li><a href="#fillcolor" class="idx-code-link">fillcolor()</a></li>
+              <li><a href="#stylestatus" class="idx-code-link">push_style()</a></li>
+              <li><a href="#stylestatus" class="idx-code-link">pop_style()</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Turtle control   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#turtle-control-collapse" aria-expanded="false">
+            Turtle control
+          </button>
+          <div class="collapse" id="turtle-control-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#turtle" class="idx-code-link">turtle()</a></li>
+              <li><a href="#st" class="idx-code-link">showturtle() st()</a></li>
+              <li><a href="#ht" class="idx-code-link">hideturtle() ht()</a></li>
+              <li><a href="#tilt" class="idx-code-link">tilt()</a></li>
+              <li><a href="#speed" class="idx-code-link">speed()</a></li>
+
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Filling and tracking    -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#turtle-track-collapse" aria-expanded="false">
+            Filling and tracking
+          </button>
+          <div class="collapse" id="turtle-track-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#bfill" class="idx-code-link">begin_fill()</a></li>
+              <li><a href="#efill" class="idx-code-link">end_fill()</a></li>
+              <li><a href="#bpoly" class="idx-code-link">begin_poly()</a></li>
+              <li><a href="#epoly" class="idx-code-link">end_poly()</a></li>
+              <li><a href="#brecord" class="idx-code-link">begin_record()</a></li>
+              <li><a href="#erecord" class="idx-code-link">end_record()</a></li>
+              <li><a href="#do" class="idx-code-link">do()</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- ###############  Graphics management    -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#graphics-manage-collapse" aria-expanded="false">
+            Graphics control
+          </button>
+          <div class="collapse" id="graphics-manage-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#animateon" class="idx-code-link">animateon()</a></li>
+              <li><a href="#animateon" class="idx-code-link">animateoff()</a></li>
+              <li><a href="#clear" class="idx-code-link">clear()</a></li>
+              <li><a href="#reset" class="idx-code-link">reset()</a></li>
+              <li><a href="#snapshot" class="idx-code-link">snapshot()</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <div class="b-divider b-hr"></div>
+
+
+        <!-- ####################################################
+             ###############  CORE SETTINGS    ##################
+             ####################################################
+             -->
+
+        <span class="fs-5 fw-semibold">Core Settings</span>
+
+        <!--  ############### Animation control   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#animation-collapse" aria-expanded="false">
+            Animation control
+          </button>
+          <div class="collapse" id="animation-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#start" class="idx-code-link">start()</a></li>
+              <li><a href="#stop" class="idx-code-link">stop()</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Graphic modes   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#mode-collapse" aria-expanded="false">
+            Graphic modes
+          </button>
+          <div class="collapse" id="mode-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#modes" class="idx-text-link">Graphic modes</a></li>
+              <li><a href="#degrees" class="idx-code-link">degrees()</a></li>
+              <li><a href="#radians" class="idx-code-link">radians()</a></li>
+
+              <li><a href="#getmodexy" class="idx-code-link">getModeXY()</a></li>
+              <li><a href="#getmodeh" class="idx-code-link">getModeH()</a></li>
+
+              <li><a href="#getscreenxy" class="idx-code-link">getScreenXY()</a></li>
+              <li><a href="#getscreenh" class="idx-code-link">getScreenH()</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <div class="b-divider b-hr"></div>
+
+        <!-- ####################################################
+             ###########   TURTLE ATTRIBUTES   ##################
+             ####################################################
+             -->
+
+        <span class="fs-5 fw-semibold">Turtle Attributes</span>
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a href="#about-attributes" class="idx-text-link">About</a></li>
+        </ul>
+
+        <!--  ############### Position and heading   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#attr-position-collapse" aria-expanded="false">
+            Position and heading
+          </button>
+
+          <div class="collapse" id="attr-position-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#getx" class="idx-code-link">getX()</a></li>
+              <li><a href="#setx" class="idx-code-link">setX()</a></li>
+
+              <li><a href="#getx" class="idx-code-link">getY()</a></li>
+              <li><a href="#sety" class="idx-code-link">setY()</a></li>
+
+              <li><a href="#getxy" class="idx-code-link">getXY()</a></li>
+              <li><a href="#setxy" class="idx-code-link">setXY()</a></li>
+
+              <li><a href="#geth" class="idx-code-link">getHeading() getH()</a> </li>
+              <li><a href="#seth" class="idx-code-link">setHeading() setH()</a> </li>
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Pen control    -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#attr-pencontrol-collapse" aria-expanded="false">
+            Pen control
+          </button>
+          <div class="collapse" id="attr-pencontrol-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+
+              <li><a href="#getpensize" class="idx-code-link">getPensize()</a></li>
+              <li><a href="#setpensize" class="idx-code-link">setPensize()</a></li>
+
+              <li><a href="#getpencolor" class="idx-code-link">getPenColor()</a></li>
+              <li><a href="#setpencolor" class="idx-code-link">setPenColor()</a></li>
+
+              <li><a href="#getdash" class="idx-code-link">getDash()</a></li>
+              <li><a href="#setdash" class="idx-code-link">setDash()</a></li>
+
+              <li><a href="#getpencap" class="idx-code-link">getCap()</a></li>
+              <li><a href="#setpencap" class="idx-code-link">setCap()</a></li>
+
+              <li><a href="#getfillcolor" class="idx-code-link">getFillColor()</a></li>
+              <li><a href="#setfillcolor" class="idx-code-link">setFillColor()</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Turtle control   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#attr-turtle-collapse" aria-expanded="false">
+            Turtle control
+          </button>
+          <div class="collapse" id="attr-turtle-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#getspeed" class="idx-code-link">getSpeed()</a></li>
+              <li><a href="#setspeed" class="idx-code-link">setSpeed()</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Graphics control   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#attr-graphics-collapse" aria-expanded="false">
+            Graphics control
+          </button>
+          <div class="collapse" id="attr-graphics-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#getpoly" class="idx-code-link">getPoly()</a></li>
+              <li><a href="#getsnapshot" class="idx-code-link">getSnapshot()</a></li>
+              <li><a href="#getimagefromosc" class="idx-code-link">getImageFromOsc()</a></li>
+
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Cursors   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#attr-cursors-collapse" aria-expanded="false">
+            Cursors
+          </button>
+          <div class="collapse" id="attr-cursors-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#modifiedlibrarycursors" class="idx-text-link">Modified library cursors</a></li>
+              <li><a href="#fromjsoffscreencanvas" class="idx-text-link">From JS OffscreenCanvas</a></li>
+              <li><a href="#getcursorfromimage" class="idx-text-link">From p5js image</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Fonts   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#attr-fonts-collapse" aria-expanded="false">
+            Fonts
+          </button>
+          <div class="collapse" id="attr-fonts-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#fontdescriptors" class="idx-text-link">Font descriptors</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Colors   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#attr-colors-collapse" aria-expanded="false">
+            Colors
+          </button>
+          <div class="collapse" id="attr-colors-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#colors" class="idx-text-link">Color descriptors</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!--  ############### Properties   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#attr-properties-collapse" aria-expanded="false">
+            Properties (get only)
+          </button>
+          <div class="collapse" id="attr-properties-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#mode" class="idx-code-link">mode</a></li>
+              <li><a href="#mode$" class="idx-code-link">mode$</a></li>
+              <li><a href="#hastasks" class="idx-code-link">hasTasks</a></li>
+              <li><a href="#nbrtasks" class="idx-code-link">nbrTasks</a></li>
+              <li><a href="#isactive" class="idx-code-link">isActive</a></li>
+              <li><a href="#isanimating" class="idx-code-link">isAnimating</a></li>
+              <li><a href="#isvisible" class="idx-code-link">isVisible</a></li>
+              <li><a href="#ispendown" class="idx-code-link">isPenDown</a></li>
+              <li><a href="#nbrstyles" class="idx-code-link">nbrStyles</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- ####################################################
+             ###########     MISCELLANEOUS     ##################
+             ####################################################
+             -->
+
+        <div class="b-divider b-hr "></div>
+        <span class="fs-5 fw-semibold">Miscellaneous</span>
+
+        <!--  ############### Methods   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#others-collapse" aria-expanded="false">
+            Methods
+          </button>
+          <div class="collapse" id="others-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#doclear" class="idx-code-link">doClear()</a></li>
+              <li><a href="#doreset" class="idx-code-link">doReset()</a></li>
+              <li><a href="#interval" class="idx-code-link">setUpdateInterval()</a></li>
+              <li><a href="#spawn" class="idx-code-link">spawn()</a></li>
+            </ul>
+          </div>
+        </li>
+        <div class="b-divider b-hr "></div>
+    </div>
+
+    <div class="b-divider b-vr "></div>
+
+
+
+
+
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+         @@@@@@@@@@@@@@@@@                @@@@@@@@@@@@@@@@@@@
+         @@@@@@@@@@@@@@@@@     CONTENT    @@@@@@@@@@@@@@@@@@@
+         @@@@@@@@@@@@@@@@@                @@@@@@@@@@@@@@@@@@@
+         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    -->
+    <div class="p-3 fs-5 scrollarea">
+
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@   INTRODUCTION   @@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>INTRODUCTION</p>
+        </div>
+        <div id="overview" class="col-10 ch-section-right">
+          <p>Overview</p>
+        </div>
+      </div>
+      <p class="cd-text">Turtle Graphics is a Javascript implementation of the popular geometric drawing tools
+        introduced in Logo, developed by Wally Feurzeig, Seymour Papert and Cynthia Solomon in 1967.</p>
+      <p class="cd-text">Imagine a robotic turtle starting at (0, 0) in the x-y plane. After creating a turtle, give
+        it
+        the command <code>turtle.forward(15)</code>, and it moves (on-screen!) 15 pixels in the direction it is
+        facing,
+        drawing a line as it moves. Give it the command turtle.right(25), and it rotates in-place 25 degrees
+        clockwise.
+      </p>
+      <p class="cd-text"> In this library, turtle graphics provides a representation of a physical “turtle” (a little
+        robot with a pen) that draws on a sheet of paper on the floor.</p>
+      <p class="cd-text">Turtle drawing was originally created as an educational tool, to be used by teachers in the
+        classroom. For the programmer who needs to produce some graphical output it can be a way to do that without
+        the
+        overhead of introducing more complex or external libraries into their work.</p>
+      <p class="cd-text">
+        <b>NOTE:</b><em> This library is written entirely in Javascript and is not dependant on any other library. All
+          examples use p5js as a simple application framework to demonstrate this library but users are free to choose
+          an alternative if they wish.</em>
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>INTRODUCTION</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p id="firstturtle">Creating our First Turtle</p>
+        </div>
+      </div>
+      <p class="cd-text">
+        The first step is to create a turtle with the statement
+      <p class="cd-code">let turtle = TG.getTurtle(400, 200);</p>
+      <p class="cd-text">The 2 parameters define the width and height of the graphics area the turtle can draw in.
+        Although the turtle is not confined to this area anything drawn outside it will not be visible.</p>
+      <p class="cd-text">Once the turtle has been created we can command the turtle to move, turn, draw lines by
+        adding
+        <b>tasks</b> in the order that we want them to be performed. For instance the statement -
+      </p>
+      <p class="cd-code">turtle.forward(20).right(25).forward(55).start();</p>
+      <p class="cd-text">will move the turtle 20 pixels in the direction it is facing, turn right 25&deg; to the
+        right,
+        move forward 55 pixels all the time, drawing a line using the current pen color. The last task
+        <code>start()</code> instructs the turtle to start performing the tasks in the specified order. If it is
+        included in the list of tasks turtle animation starts immediately. Alternatively we can add the tasks then
+        start the turtle at some later time.
+      </p>
+      <p class="cd-text">There is no limit to the number of tasks that can be added to the turtle and the library
+        includes over 40 unique tasks to choose from. They are all described in the <b>Tasks</b> section of this
+        guide.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@   TASKS   @@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TASKS</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Move and Draw</p>
+        </div>
+      </div>
+
+      <p id="xy" class="ch-code">
+        turtle.x(x, fill_gap = false)<br>
+        turtle.y(y, fill_gap = false)<br>
+        turtle.xy(x, y, fill_gap = false)<br>
+      </p>
+      <p class="cd-text">
+        Move the turtle to an absolute position without drawing a line and without changing the turtle&apos;s heading.
+        If currently filling, any existing fill shape will be filled before moving and a new fill shape will be
+        started
+        after moving.</p>
+      <p class="cd-text">
+        This can be disabled with <code>fill_gap = true</code>, which makes the
+        imaginary line traveled during movement part of the current fill shape.
+      </p>
+      <p class="cd-text"><em>The change of position is applied without any animation.</em> </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="dxy" class="ch-code">
+        turtle.dxy(d_x, d_y, fill_gap = false)<br>
+      </p>
+      <p class="cd-text">
+        Move the turtle to a position relative to the current poition without drawing a line and without changing the
+        turtle&apos;s heading. If currently filling, any existing fill shape will be filled before moving and a new
+        fill
+        shape will be started after moving.</p>
+      <p class="cd-text">
+        This can be disabled with <code>fill_gap = true</code>, which makes the imaginary line traveled during
+        movement
+        part of the current fill shape.
+      </p>
+      <p class="cd-text"><em>The change of position is applied without any animation.</em> </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="face" class="ch-code">
+        turtle.face(angle)<br>
+      </p>
+      <p class="cd-text">
+        Change the turtle's forward direction so it faces the specified angle. </p>
+      <p class="cd-text"><em>The change of angle is applied without any animation.</em> </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="forward" class="ch-code">
+        turtle.forward(distance)<br>
+        turtle.fd(distance)<br>
+      </p>
+      <p class="cd-text"> Move the turtle in the direction it is headed by the <code>distance</code> pixels.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="backward" class="ch-code">
+        turtle.backward(distance)<br>
+        turtle.back(distance)<br>
+        turtle.bk(distance)<br>
+      </p>
+      <p class="cd-text">
+        Move the turtle opposite to the direction it is headed by <code>distance</code> pixels.
+        The turtle&apos;s heading is unchanged. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="left" class="ch-code">
+        turtle.left(ang)<br>
+        turtle.lt(ang)<br>
+      </p>
+      <p class="cd-text">
+        Turn left by the specified angle. The default rotational unit is degrees (&deg;) but chan be changed to
+        <a href="#radians" class="idx-code-link">radians</a>.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="right" class="ch-code">
+        turtle.right(ang)<br>
+        turtle.rt(ang)<br>
+      </p>
+      <p class="cd-text">
+        Turn right by the specified angle. The default rotational unit is degrees (&deg;) but chan be changed to
+        <a href="#radians" class="idx-code-link">radians</a>.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="heading" class="ch-code">
+        turtle.heading(angle)<br>
+        turtle.head(angle)<br>
+      </p>
+      <p class="cd-text">
+        Change the turtle's heading to this angle. The default rotational unit is degrees (&deg;) but be changed to
+        <a href="#radians" class="idx-code-link">radians</a>.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="home" class="ch-code">
+        turtle.home()<br>
+      </p>
+      <p class="cd-text">
+        Move the turtle to its home position [0, 0].
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="goto" class="ch-code">
+        turtle.goto(x, y)<br>
+      </p>
+      <p class="cd-text">
+        Move turtle to an absolute position. If the pen is down then a line is drawn. The the turtle&apos;s heading
+        will
+        be changed to match the direction moved. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="goby" class="ch-code">
+        turtle.goby(dx, dy)<br>
+      </p>
+      <p class="cd-text">
+        Move turtle to a position relative to the current postion. If the pen is down then a line is drawn. The the
+        turtle&apos;s heading will be changed to match the direction moved. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="dot" class="ch-code">
+        turtle.dot(size = 6, fill_color = 'current', bdr_weight = 0, bdr_color = 'current')<br>
+      </p>
+      <p class="cd-text">
+        Draw a circular dot with specified radius.</p>
+      <ul class="cd-ul">
+        <li class="cd-li"> If <code>size</code> is &le; 0 then the maximum of <code>pensize + 4</code>
+          and <code>2 * pensize</code> is used. </li>
+        <li class="cd-li"> The default dot is borderless unless <code>bdr_weight</code> is &ge; 0. If
+          <code>bdr_weight</code> =0 then the current pensize is used.
+        </li>
+        <li class="cd-li"> <code>fill_color</code> the fill color to use. If not provided or = <code>'current'</code>
+          then the current fill color is used. </li>
+        <li class="cd-li"> <code>bdr_color</code> the border color to use. If not provided or =
+          <code>'current'</code> then the current pen color is used.
+        </li>
+      </ul>
+      <div class="b-divider b-hr "></div>
+
+      <p id="arrow" class="ch-code">
+        turtle.arrow(size = 6, fill_color = 'current', bdr_weight = 0, bdr_color = 'current')<br>
+      </p>
+      <p class="cd-text">
+        Draw an arrow head (triangle) so its tip is at the current pen position and it is facing the current heading.
+      </p>
+      <ul class="cd-ul">
+        <li class="cd-li"> <code>size</code> = the side length of the arrow head. The default value is 6</li>
+        <li class="cd-li"> The default arrow is borderless unless <code>bdr_weight</code> is &ge;0. If
+          <code>bdr_weight</code> =0 then the current pensize is used.
+        </li>
+        <li class="cd-li"> <code>fill_color</code> the fill color to use. If not provided or = <code>'current'</code>
+          then the current fill color is used. </li>
+        <li class="cd-li"> <code>bdr_color</code> the border color to use. If not provided or =
+          <code>'current'</code> then the current pen color is used.
+        </li>
+      </ul>
+      <div class="b-divider b-hr "></div>
+
+      <p id="circle" class="ch-code">
+        turtle.circle(rad_b, extent = 0, turnDir = RT, steps = 0)<br>
+        turtle.oval(rad_a, rad_b, extent = 0, turnDir = RT, steps = 0)<br>
+      </p>
+      <p class="cd-text">
+        Follow a circular or oval path. The path can be smooth or created from a number of straight lines, (chords)
+      </p>
+      <figure class="text-center">
+        <img src="ovals.png" class="figure-img img-fluid rounded" alt="folllowing an oval path">
+        <figcaption class="figure-caption text-center">Following an oval arc path</figcaption>
+      </figure>
+      <ul class="cd-ul">
+        <li class="cd-li"> <code>rad_a</code> is the radius in the current direction of travel (heading).</li>
+        <li class="cd-li"> <code>rad_b</code> is the radius orthoganol to the current direction of travel (heading).
+        </li>
+        <li class="cd-li"> <code>extent</code> the angle to be subtended by the turtle. A full circle / oval is drawn
+          if
+          the extent is 360&deg; or 2&pi; radians.</li>
+        <li class="cd-li"> <code>turnDir</code> must be either <code>LT</code> or <code>RT</code> and determines
+          whether
+          the turtle turns to the left or to the right. The actual visual effect depends on the turtle&apos;s mode.
+        </li>
+        <li class="cd-li"><code>steps</code> if =0 then the path will be smooth. If &gt;0 then each 'step' along the
+          path is a chord or the circle / oval. </li>
+      </ul>
+      <p class="cd-text">The turtle paths shown in the picture above were created with the following code -</p>
+      <p class="cd-code">
+        turtle.rt(25).fd(55).arrow(6)<br>
+        &nbsp;&nbsp;.oval(25, 15, 150, RT, 0).arrow(6)<br>
+        &nbsp;&nbsp;.fd(130).arrow(6)</p>
+      <p class="cd-text">The curve drawn depends on the turtle&apos;s mode as shown in the image. The default mode is
+        'display'</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="sleep" class="ch-code">
+        turtle.sleep(duration)<br>
+      </p>
+      <p class="cd-text">
+        Pause the turtle animation for <code>duration</code> milliseconds.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="write" class="ch-code">
+        turtle.write(text, move = false, align = 'left', font : <i>optional</i>)<br>
+      </p>
+      <p class="cd-text">
+        Write the string representation <code>text</code> at the current turtle position which will be on the text
+        baseline. The text can be aligned to the current turtle position according to <code>align</code>> (“left”,
+        “center” or “right”). If <code>move</code> is true, the pen is moved to the bottom-right corner of
+        the text.
+      </p>
+      <p class="cd-text">
+        If no font descriptor is provided (<code>font</code>) then the default font is used.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="font" class="ch-code">
+        turtle.font(style)<br>
+      </p>
+      <p class="cd-text">
+        Set the default font style for this turtle. This style will be used in future <code>write</code> tasks until
+        changed.
+      </p>
+
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@    PEN CONTROL   @@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      -->
+
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TASKS</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Pen Control</p>
+        </div>
+      </div>
+
+      <p id="up" class="ch-code">
+        turtle.penup()<br>
+        turtle.pu()<br>
+        turtle.up()<br>
+      </p>
+      <p class="cd-text">
+        Lift the pen up so there is no drawing when moving.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="down" class="ch-code">
+        turtle.pendown()<br>
+        turtle.pd()<br>
+        turtle.down()<br>
+      </p>
+      <p class="cd-text">
+        Put the pen down so there is drawing when moving.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="pensize" class="ch-code">
+        turtle.pensize(width = 2)<br>
+      </p>
+      <p class="cd-text">
+        Changes the line-width used when drawing.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="dash" class="ch-code">
+        turtle.dash(pattern[line_len, gap_size ...] : <i>optional</i>)<br>
+      </p>
+      <p class="cd-text">
+        The parameter is an array of numbers representing the dash pattern to be used. The numbers are in pairs where
+        the first is the line-length and the second the gap size, addition number pairs can be included to create more
+        complex patterns.
+      </p>
+      <figure class="text-center">
+        <img src="dash.png" class="figure-img img-fluid rounded" alt="shows line dash examples">
+        <figcaption class="figure-caption text-center">Line dash examples.</figcaption>
+      </figure>
+      <p class="cd-text">
+        If <code>pattern</code> is an empty array or is not provided then all subsequent lines will be solid until a
+        new
+        dash pattern is specified. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="pencap" class="ch-code">
+        turtle.pencap(cap)<br>
+        turtle.cap(cap)<br>
+      </p>
+      <p class="cd-text">
+        Changes the line-cap used at the end of a line. Valid options are <b>BUTT</b>, <b>SQUARE</b> or <b>ROUND</b>.
+        The default value is <b>ROUND</b>.
+      </p>
+      <figure class="text-center">
+        <img src="linecaps.png" class="figure-img img-fluid rounded" alt="shows line caps options">
+        <figcaption class="figure-caption text-center">Shows the 3 line-cap options.</figcaption>
+      </figure>
+      <div class="b-divider b-hr "></div>
+
+      <p id="pencolor" class="ch-code">
+        turtle.pencolor(color)<br>
+      </p>
+      <p class="cd-text">
+        Changes the color used to draw lines.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="fillcolor" class="ch-code">
+        turtle.fillcolor(color)<br>
+      </p>
+      <p class="cd-text">
+        Changes the color used to fill shapes created by the turtle.
+      </p>
+
+      <p id="stylestatus" class="ch-code">
+        turtle.push_style()<br>
+      </p>
+      <p class="cd-text">
+        Save the current pen style. This includes the following information :-
+      </p>
+      <ul class="cd-ul">
+        <li>whether the pen is up or down</li>
+        <li>the pen size, dash-style and color</li>
+        <li>the line cap style</li>
+        <li>the fill color</li>
+        <li>whether to trace (animate) the movement</li>
+        <li>whether the turtle cursor is visible or not</li>
+        <li>tilt angle for the turtle cursor</li>
+      </ul>
+
+      <p id="stylestatus" class="ch-code">
+        turtle.pop_style()<br>
+      </p>
+      <p class="cd-text">
+        Restore the pen style attributes saved by the last <code>push()</code> statment.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@   TURTLE CONTROL   @@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TASKS</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Turtle Control</p>
+        </div>
+      </div>
+
+      <p id="turtle" class="ch-code">
+        turtle.turtle(cursor)<br>
+      </p>
+
+      <p class="cd-text">
+        This default cursor is called <span class="mono">DART</span> but the library has several predefined cursors to
+        choose from they are :-
+      </p>
+      <figure class="text-center">
+        <img src="cursors.png" class="figure-img img-fluid rounded" alt="library cursors">
+        <figcaption class="figure-caption text-center">Predefined library cursors.</figcaption>
+      </figure>
+      <p class="cd-text">To change the turtle cursor to a star then use <code>turtle.turtle(STAR)</code>.</p>
+      <p class="cd-text">As well as the library cursors, this task will also accept <a
+          href="#modifiedlibrarycursors">user defined cursors</a>.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="st" class="ch-code">
+        turtle.showturtle()<br>
+        turtle.st()<br>
+      </p>
+      <p class="cd-text"> Show the turtle cursor. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="ht" class="ch-code">
+        turtle.hideturtle()<br>
+        turtle.ht()<br>
+      </p>
+      <p class="cd-text">
+        Hide the turtle cursor.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="tilt" class="ch-code">
+        turtle.tilt(angle : <i>optional</i>)<br>
+      </p>
+      <p class="cd-text">
+        If <code>angle</code> is not provided then the turtle cursor is rotated to match the current forward direction
+        and the current tilt angle is ignored. If a value is provided then it is used to rotate the cursor
+        irrespective
+        of the turtle&apos;s heading.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="speed" class="ch-code"> turtle.speed(linear, angular)<br> </p>
+      <p class="cd-text"> This task can be used to change either or both the </p>
+      <ul class="cd-ul">
+        <li>turtle&apos;s linear speed (pixels/s)</li>
+        <li>turtle&apos;s rotational speed (&deg;/s or radians/s)</li>
+      </ul>
+      <p class="cd-text">If either parameter value is <code>NaN</code> then the current value is unchanged. The
+        default
+        rotational unit is degrees (&deg;) but chan be changed to <a href="#radians" class="idx-code-link">radians</a>.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@   FILLING AND TRACKING   @@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TASKS</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Filling and Tracking</p>
+        </div>
+      </div>
+
+      <p id="bfill" class="ch-code">
+        turtle.begin_fill()<br>
+      </p>
+      <p class="cd-text">
+        Start remembering vertices for a shape that is to be filled later.
+      </p>
+      <div class="b-divider b-hr"></div>
+
+      <p id="efill" class="ch-code">
+        turtle.end_fill(close = false)<br>
+      </p>
+      <p class="cd-text">
+        Fill the shape drawn after the last call to begin_fill() with the current fill-color. If <code>close</code> is
+        true then a line is drawn to the start of the fill, closing ths shape.
+      </p>
+      <p class="cd-text">
+        Whether or not overlap regions for self-intersecting polygons or multiple shapes are filled depends on the
+        operating system graphics, type of overlap, and number of overlaps.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="bpoly" class="ch-code"> turtle.begin_poly()<br> </p>
+      <p class="cd-text">
+        Start recording the vertices of a polygon. Current turtle position is first vertex of polygon.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="epoly" class="ch-code"> turtle.end_poly(id)<br> </p>
+      <p class="cd-text">
+        Stop recording the vertices of a polygon keeping the current turtle position as the last vertex.
+        A unique identifier (<code>id</code>) must be provided so the polygon vertices can be retrieved later with -
+      </p>
+      <p class="cd-text"><code>turtle.getPoly(id);</code></p>
+      <p class="cd-text">
+        The polygon returned is an array of [x,y] tuples.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="brecord" class="ch-code"> turtle.begin_record()<br> </p>
+      <p class="cd-text">
+        Start recording the tasks assigned to this turtle.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="erecord" class="ch-code"> turtle.end_record(id)<br> </p>
+      <p class="cd-text">
+        Stop recording the tasks assigned to this turtle. A unique identifier (<code>id</code>) must be provided so
+        the
+        task-list can be executed by this, or any other turtle using the <code>do</code> task like this - </p>
+      <p class="cd-code">turtle.do(id);<br>any_other_turtle.do(id)</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="do" class="ch-code"> turtle.do(...action)<br> </p>
+      <p class="cd-text">
+        The parameter <code>action</code> comprises one or more comma seperated values. The first value is either
+      </p>
+      <ul class="cd-ol">
+        <li>the id of a task-list created with <code>begin_record</code> and <code>end_record</code> so if we recorded
+          a
+          task sequence with the id 'action` then we can replay theses tasks with
+          <code>turtle.do('record_id');</code> and additional parameters will be ignored.
+        </li>
+        <li>a javascript function. The first parameter in this function will be the turtle followed by and additional
+          values will be passed to the <code>do</code> function. In this example the turtle&apos;s speed is changed by
+          a
+          user defined percentage.<br>
+          <p class="cd-code">
+            turtle.do(change_speed, 25); // increase speed by 25%<br><br>
+            function change_speed(turtle, data){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;let by = data[0] / 100;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;let speed = turtle.getSpeed();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;turtle.setSpeed(speed[0] * (i + by), speed[1] * (i + by));<br>
+            }
+          </p>
+          The user defined function has two parameters, the first is the turtle calling this method and the second an
+          array holding any additional parameter values passed to the <code>do</code> function. In this case
+          <code>data = 25</code>
+        </li>
+      </ul>
+      <div class="b-divider b-hr "></div>
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@   GRAPHICS CONTROL   @@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TASKS</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Graphics Control</p>
+        </div>
+      </div>
+
+      <p id="animateon" class="ch-code">
+        turtle.animateon()<br>
+        turtle.animateoff()<br>
+      </p>
+      <p class="cd-text">
+        If animation is switched off then all tasks will be completed as fast as possible ignoring the current speed
+        values. Switching it back on re-enables the turtle animation.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="clear" class="ch-code">
+        turtle.clear()<br>
+      </p>
+      <p class="cd-text">
+        This will erase all graphics created by this turtle leaving a blank canvas. The turtle&apos;s position,
+        heading
+        and other attributes are unchanged.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="reset" class="ch-code">
+        turtle.reset()<br>
+      </p>
+      <p class="cd-text">
+        As well as erasing the current canvas; the turtle&apos;s position, heading
+        and all other attributes are returned to their initial values.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="snapshot" class="ch-code"> turtle.snapshot(id)<br> </p>
+      <p class="cd-text">
+        Store a copy of the current turtle-graphics image. A unique identifier (<code>id</code>) must be provided so
+        the snapshot can be retrieved later with - <code>turtle.getSnapshot(id);</code></p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@   CORE SETTINGS   @@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>CORE SETTINGS</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Animation Control</p>
+        </div>
+      </div>
+
+      <p id="start" class="ch-code">
+        turtle.start()<br>
+      </p>
+      <p class="cd-text">
+        This will cause the turtle to immediately start processing any queued tasks. If there are no tasks to process
+        then the turtle will wait and process new tasks as and when they are added to the task queue.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="stop" class="ch-code">
+        turtle.stop()<br>
+      </p>
+      <p class="cd-text">
+        This will stop the turtle processing any queued tasks. To restart processing the <code>start</code> method
+        should be executed manually with - </p>
+      <p class="cd-code">turtle.start();</p>
+      <div class="b-divider b-hr "></div>
+
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>CORE SETTINGS</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Graphic Modes</p>
+        </div>
+      </div>
+
+      <p class="cd-text">This library supports 3 modes each having its own coordinate system they are <b>DISPLAY</b>,
+        <b>STANDARD</b> and <b>LOGO</b>. The turtle&apos;s mode is specified by adding one of these options as a third
+        parameter when creating the turtle e.g.
+      </p>
+      <p class="cd-code">let turtle = TG.getTurtle(200, 200, STANDARD);</p>
+      <p class="cd-text">The standard and logo modes are included for compatability with earlier turtle graphic
+        libraries. If the mode is not specified then the turtle uses the <b>DISPLAY</b> option.
+      </p>
+      <figure class="text-center">
+        <img src="modes.png" class="figure-img img-fluid rounded" alt="image showing 3 graphic modes available">
+        <figcaption class="figure-caption text-center">Coordinate system and rotation directions
+        </figcaption>
+      </figure>
+      <div class="ms-5 col-lg-9">
+        <table class="table table-bordered border border-dark">
+          <thead>
+            <tr class=" table-secondary border border-dark">
+              <th scope="col">Mode</th>
+              <th scope="col">X axis direction</th>
+              <th scope="col">Y axis direction</th>
+              <th scope="col">0&deg; direction</th>
+              <th scope="col">increasing angle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">display</th>
+              <td>East</td>
+              <td>South</td>
+              <td>East</td>
+              <td>Clockwise</td>
+            </tr>
+            <tr>
+              <th scope="row">standard</th>
+              <td>East</td>
+              <td>North</td>
+              <td>East</td>
+              <td>Counterclockwise</td>
+            </tr>
+            <tr>
+              <th scope="row">logo</th>
+              <td>East</td>
+              <td>North</td>
+              <td>North</td>
+              <td>Clockwise</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cd-text">Movement and rotation depends on the mode coordinate system for that turtle, Turning left
+        or right is not dependant on the forward direction, instead right turns increase the heading angle and left
+        turns decrease the heading angle.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="degrees" class="ch-code">turtle.degrees()<br> </p>
+      <p class="cd-text">
+        Set angle measurement units to degrees. This applies to all angles expected by and returned from the turtle
+        functions. It is the default unit for new turtles.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="radians" class="ch-code">turtle.radians()<br> </p>
+      <p class="cd-text">
+        Set angle measurement units to radians. This applies to all angles expected by and returned from the turtle
+        functions.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getmodexy" class="ch-code">turtle.getModeXY(x, y, cx = 0, cy = 0)<br> </p>
+      <p class="cd-text">
+        Convert the screen coordinates <code>x</code> and <code>y</code> to the equivalent position in mode space.
+        The
+        parameters <code>cx</code> and <code>cy</code> represent the screen position for the center of the turtle
+        graphics. The turtle position is unchanged.
+      </p>
+      <p class="cd-text">The mode coordinates are returned as a tuple <code>[mx, my]</code>.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getmodeh" class="ch-code"> turtle.getModeH(screenH)<br> </p>
+      <p class="cd-text">
+        Given a screen heading (<code>screenA</code>) get the equivalent mode heading. The turtle heading is
+        unchanged.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getscreenxy" class="ch-code">turtle.getScreenXY(cx = 0, cy = 0)<br> </p>
+      <p class="cd-text">
+        Convert the current pen coordinates to the equivalent position on the screen. The parameters <code>cx</code>
+        and
+        <code>cy</code> represent the screen position for the center of the turtle graphics.
+      </p>
+      <p class="cd-text">The screen coordinates are returned as a tuple <code>[sx, sy]</code>.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getscreenh" class="ch-code"> turtle.getScreenH()<br> </p>
+      <p class="cd-text">
+        Get the current pen heading after converting to the equivalent screen angle.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@   TURTLE ATTRIBUTES   @@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE ATTRIBUTES</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p id="about-attributes">About</p>
+        </div>
+      </div>
+      <p class="cd-text">
+        Unlike <b>tasks</b> which are queued and then performed in sequence later, these functions are used to set the
+        turtles&apos;s attributes with immediate effect; although most have a matching <b>task</b> which can be used
+        instead.</p>
+      <p class="cd-text">These methods support the creation of user defined <b>tasks</b> based on the current state of
+        the turtle. Assume we want a <b>task</b> that doubles the pensize and halves its speed, there is no
+        <b>task</b>
+        that does this but it is possible to solve this problem. In this example we create a task called
+        <code>foo_task</code> that does just that.
+      </p>
+      <p class="cd-code">
+        function foo_task(turtle, data){<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;let psize = turtle.getPensize();<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;let speed = turtle.getSpeed();<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;turtle.setPensize(psize * 2);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;turtle.setSpeed(speed[0] / 2, speed[1] / 2);<br>
+        } <br><br>
+        turtle.do(foo_task, 25); // perform our user defined task<br><br>
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@    Position and heading    -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE ATTRIBUTES</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Position and Heading</p>
+        </div>
+      </div>
+      <p id="getx" class="ch-code">turtle.getX()<br> </p>
+      <p class="cd-text">Return the turtle&apos;s x position.</p>
+      <p id="setx" class="ch-code">turtle.setX(x)<br> </p>
+      <p class="cd-text">Sets the turtle&apos;s x position.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="gety" class="ch-code">turtle.getY()<br> </p>
+      <p class="cd-text">Return the turtle&apos;s y position.</p>
+      <p id="sety" class="ch-code">turtle.setY(y)<br> </p>
+      <p class="cd-text">Sets both the turtle&apos;s y position.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getxy" class="ch-code">turtle.getXY()<br> </p>
+      <p class="cd-text">Return the turtle&apos;s position as a tupple:- <code>[x, y]</code>.</p>
+      <p id="setxy" class="ch-code">turtle.setXY(x, y)<br> </p>
+      <p class="cd-text">Sets both the turtle&apos;s x and y position.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="geth" class="ch-code">turtle.getHeading()<br>turtle.getH() </p>
+      <p class="cd-text">Return the turtle&apos;s heading.</p>
+      <p id="seth" class="ch-code">turtle.setHeading(angle)<br>turtle.setH(angle) </p>
+      <p class="cd-text">
+        Set the turtle's heading to this angle. The default rotational unit is degrees (&deg;) but be changed to
+        <a href="#radians" class="idx-code-link">radians</a>.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@    Pen control    -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE ATTRIBUTES</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Pen Control</p>
+        </div>
+      </div>
+      <p id="getpensize" class="ch-code">turtle.getPenSize()<br> </p>
+      <p class="cd-text">Return the turtle&apos;s pen size.</p>
+      <p id="setpensize" class="ch-code">turtle.setPenSize(size)<br> </p>
+      <p class="cd-text">Sets the turtle&apos;s pen size.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getpencolor" class="ch-code">turtle.getPenColor()<br> </p>
+      <p class="cd-text">Return the color used for drawing lines.</p>
+      <p id="setpencolor" class="ch-code">turtle.setPenColor(color)<br> </p>
+      <p class="cd-text">Sets the color used to draw lines.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getdash" class="ch-code">turtle.getDash()<br> </p>
+      <p class="cd-text">Return the current dash pattern as an array. (see setDash below for details)</p>
+      <p id="setdash" class="ch-code">
+        turtle.setDash(pattern[line_len, gap_size ...] : <i>optional</i>)<br>
+      </p>
+      <p class="cd-text">
+        The parameter is an array of numbers representing the dash pattern to be used. The numbers are in pairs where
+        the first is the line-length and the second the gap size, addition number pairs can be included to create more
+        complex patterns.
+      </p>
+      <figure class="text-center">
+        <img src="dash.png" class="figure-img img-fluid rounded" alt="shows line dash examples">
+        <figcaption class="figure-caption text-center">Line dash examples.</figcaption>
+      </figure>
+      <p class="cd-text">
+        If <code>pattern</code> is an empty array or is not provided then all subsequent lines will be solid until a
+        new
+        dash pattern is specified. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getpencap" class="ch-code">turtle.getCap()<br> </p>
+      <p class="cd-text">Return the current line-end style.</p>
+      <p id="setpencap" class="ch-code">turtle.setCap(style)<br> </p>
+      <p class="cd-text">
+        Sets the line-cap used at the end of a line. Valid options are <b>BUTT</b>, <b>SQUARE</b> or <b>ROUND</b>.
+      </p>
+      <figure class="text-center">
+        <img src="linecaps.png" class="figure-img img-fluid rounded" alt="shows line caps options">
+        <figcaption class="figure-caption text-center">Shows the 3 line-cap options.</figcaption>
+      </figure>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getfillcolor" class="ch-code">turtle.getFillColor()<br> </p>
+      <p class="cd-text">Return the color used for filling shapes.</p>
+      <p id="setfillcolor" class="ch-code">turtle.setFillColor(color)<br> </p>
+      <p class="cd-text">Sets the color used to fill shapes.</p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@    Turtle control    -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE ATTRIBUTES</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Turtle Control</p>
+        </div>
+      </div>
+      <p id="getspeed" class="ch-code">turtle.getSpeed()<br> </p>
+      <p class="cd-text">Return the turtle&apos;s position as a tupple:- <code>[x, y]</code>.</p>
+      <p id="setspeed" class="ch-code">turtle.setSpeed(linear, angular)<br> </p>
+      <p class="cd-text">Sets either or both the</p>
+      <ul class="cd-ul">
+        <li>turtle&apos;s linear speed (pixels/s)</li>
+        <li>turtle&apos;s rotational speed (&deg;/s or radians/s)</li>
+      </ul>
+      <p class="cd-text">If either parameter value is <code>NaN</code> then the current value is unchanged.
+        The default rotational unit is degrees (&deg;) but chan be changed to <a href="#radians"
+          class="idx-code-link">radians</a>. </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@    Graphics control    -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE ATTRIBUTES</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Graphics Control</p>
+        </div>
+      </div>
+      <p id="getpoly" class="ch-code">turtle.getPoly(id)<br> </p>
+      <p class="cd-text">Get the vertices for a recorded polygon with the specified <code>id</code>. The points will
+        be
+        transformed to DISPLAY mode coordinates irrespective of the turtle&apos;s mode so they correspond to the
+        vertex
+        positions as displayed on the computer screen. </p>
+      <p class="cd-text">The vertices are are stored in an array of tuples:-<br>
+        <code>[ [x<sub>0</sub>, y<sub>0</sub>], [x<sub>1</sub>, y<sub>1</sub>], [x<sub>2</sub>, y<sub>2</sub>], ... &nbsp; ]</code>
+      </p>
+      <p class="cd-text">If this turtle has no polygon named <code>id</code> then this function returns
+        <code>undefined</code>
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getsnapshot" class="ch-code">turtle.getSnapshot(id)<br> </p>
+      <p class="cd-text">Get the saved image with the specified <code>id</code>. The returned image will be of type
+        <code>OffscreenCanvas</code>.
+      </p>
+      <p class="cd-text">If this turtle has no image named <code>id</code> then this function returns
+        <code>undefined</code>
+      </p>
+
+      <p id="getimagefromosc" class="ch-code">turtle.getImageFromOsc(osc, p)<br> </p>
+      <p class="cd-text">A p5js helper function to convert a OffscreenCanvas (<code>osc</code>) image to a Processing
+        image. The second parameter, <code>p</code>, is a reference to the Processing sketch.</p>
+      <p class="cd-text">The returned image will be of type <code>p5.Image</code>
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@    Cursors    -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE ATTRIBUTES</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Cursors</p>
+        </div>
+      </div>
+      <p id="modifiedlibrarycursors" class="ch-text">Modified library cursors<br> </p>
+      <figure class="text-center">
+        <img src="cursors.png" class="figure-img img-fluid rounded" alt="library cursors">
+        <figcaption class="figure-caption text-center">Predefined library cursors.</figcaption>
+      </figure>
+      <p class="cd-text">It is possible to create new cursors based on these shapes but with user defined size and
+        colors. </p>
+      <p class="cd-code">
+        // modified TURTLE shape <br>
+        cursor = csrTURTLE(size, skin_col, shell_col, sw, scol); <br><br>
+        // all other shapes (replace ??? by library cursor name e.g. ARROW) <br>
+        cursor = csr???(size, fcol, sw, scol); <br>
+      </p>
+      <p class="cd-text">Where -</p>
+      <ul class="cd-ul">
+        <li class="cd-li"> <code>size</code>&nbsp;&nbsp;is the desired size of the cursor.</li>
+        <li class="cd-li"> <code>skin_col</code>&nbsp;&nbsp;the color used fo the legs and head of the turtle. </li>
+        <li class="cd-li"> <code>shell_col</code>&nbsp;&nbsp;the color used fo the shell of the turtle. </li>
+        <li class="cd-li"> <code>sw</code>&nbsp;&nbsp;the width of the border highlight. The hide the border set this
+          parameter to 0 (zero).</li>
+        <li class="cd-li"> <code>scol</code>&nbsp;&nbsp;The border highlight color.</li>
+      </ul>
+      <p class="cd-text">To change the turtle cursor to a white star with a strong red border use - </p>
+
+      <p class="cd-code">
+        cursor = csrSTAR(30, 'white', 2, 'red'); <br>
+        turtle.turtle(cursor);
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="fromjsoffscreencanvas" class="ch-text">From JS OffsceenCanvas<br> </p>
+      <p class="cd-text">A cursor can be created from any predefined image (of type <code>OffscreenCanvas</code>)
+        using
+        the function</p>
+      <p class="cd-code"> cursor = new Cursor(osc, fx, fy); </p>
+      <p class="cd-text">Where -</p>
+      <ul class="cd-ul">
+        <li class="cd-li"> <code>osc</code>&nbsp;&nbsp;is the predefined image.</li>
+        <li class="cd-li"> <code>fx</code>&nbsp;&nbsp;the normalised horizontal position of the cursor hit position.
+        </li>
+        <li class="cd-li"> <code>fy</code>&nbsp;&nbsp;the normalised vertical position of the cursor hit position.
+        </li>
+      </ul>
+      <p class="cd-text">The values <code>fx</code> and <code>fy</code> are in the range 0.0 to 1.0 and if multiplied
+        by the image width and height respectively gives the pixel position of the hit spot.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="getcursorfromimage" class="ch-text">From p5js image<br> </p>
+      <p class="cd-text">A p5js helper function to create a cursor from any predefined image (of type
+        <code>p5.Image</code>).
+      </p>
+      <p class="cd-code"> cursor = getCursorFromImage(p5image, fx, fy); </p>
+      <p class="cd-text">Where -</p>
+      <ul class="cd-ul">
+        <li class="cd-li"> <code>p5image</code>&nbsp;&nbsp;is the predefined p5js image.</li>
+        <li class="cd-li"> <code>fx</code>&nbsp;&nbsp;the normalised horizontal position of the cursor hit position.
+        </li>
+        <li class="cd-li"> <code>fy</code>&nbsp;&nbsp;the normalised vertical position of the cursor hit position.
+        </li>
+      </ul>
+      <p class="cd-text">The values <code>fx</code> and <code>fy</code> are in the range 0.0 to 1.0 and if multiplied
+        by the image width and height respectively gives the pixel position of the hit spot.</p>
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@    Fonts    -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE ATTRIBUTES</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Fonts</p>
+        </div>
+      </div>
+      <p id="fontdescriptors" class="ch-text">Font descriptors<br> </p>
+      <p class="cd-text"> The font descriptor is a string variable which contains either 3 or 4 font attributes. The
+        format is </p>
+      <p class="cd-code">"WEIGHT STYLE SIZE FAMILY_NAME"</p>
+      <p class="cd-text"><b>WEIGHT</b> - any value in the range 1 and 1000 inclusive is valid but it is usually a
+        multiple of 100. Normal weight is 400 and bold 700.</p>
+      <p class="cd-text"><b>STYLE</b> - If not included in the descriptor then plain text is used. Valid values
+        include
+        'italic' and ' oblique' both have the effect of making the text lean to the right.</p>
+      <p class="cd-text"><b>SIZE</b> - This is the font size, examples include 12px 40em ...</p>
+      <p class="cd-text"><b>FAMILY_NAME</b> - There are two types of font family names:</p>
+      <ul class="cd-ul">
+        <li class="cd-li"> <b>family-family</b>&nbsp;&nbsp;such as "times", "courier",
+          "arial", etc.</li>
+        <li class="cd-li"> <b>generic-family</b>&nbsp;&nbsp;the 5 generic families are called "serif", "sans-serif",
+          "cursive", "fantasy" and "monospace".</li>
+      </ul>
+      <p class="cd-text">Font descriptor examples include:</p>
+      <ul class="cd-ul">
+        <li class="cd-li">'400 italic 12px fantasy'</li>
+        <li class="cd-li">'700 16px Arial'</li>
+        <li class="cd-li">'100 20px "Gill Sans MT"'</li>
+      </ul>
+      <p class="cd-text">For more information about CSS fonts clck <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/font" target="_blank">here</a>.</p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@    Colors    -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE ATTRIBUTES</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Colors</p>
+        </div>
+      </div>
+      <p id="colors" class="ch-text">Color descriptors<br> </p>
+      <p class="cd-text">In this library there are several tasks that expect color-values to be passed as
+        string parameters. Based on CSS guidelines these strings can be <em>named-colors</em>,
+        <em>color-functions</em>
+        or <em>hex-coded</em>.
+      </p>
+      <p class="cd-text"><b>Named colors:</b></p>
+      <p class="cd-text">CSS defines a large set of named colors, so that common colors can be written and read more
+        easily. Apart from the expected <code>'white'</code>, <code>'black'</code>, <code>'yellow'</code> there are
+        over
+        160 named colors which you can see <a href="https://www.w3.org/TR/css-color-4/#named-colors"
+          target="_blank">here</a>. There is also a named color <code>'transparent'</code>.</p>
+
+      <p class="cd-text"><b>Color functions (modern syntax):</b></p>
+      <p class="cd-text">The functions for three common color spaces are described here - </p>
+      <ul class="cd-ul list-unstyled">
+        <li class="cd-li ">sRGB : red, green blue with optional alpha.</li>
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>'rgb(r g b)'</code><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>'rgb(r g b / a)'</code>
+        <li class="cd-li">sHSL : hue, saturation, luminance with optional alpha.</li>
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>'rgb(h s l)'</code><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>'rgb(h s l / a)'</code>
+        <li class="cd-li">sHWB : hue, whiteness, blackness with optional alpha.</li>
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>'hwb(h w b)'</code><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>'hwb(h w b / a)'</code>
+      </ul>
+      <div class="ms-5 col-lg-5">
+        <table class="table table-bordered border border-dark">
+          <thead>
+            <tr class=" table-secondary border border-dark ">
+              <th scope="col">Parameters</th>
+              <th scope="col">Valid ranges (inclusive)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">r&nbsp;&nbsp;&nbsp;g&nbsp;&nbsp;&nbsp;b</th>
+              <td>0 -> 255&nbsp;&nbsp;&nbsp;&nbsp;<em>or</em>&nbsp;&nbsp;&nbsp;&nbsp;0% -> 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">h</th>
+              <td>0 -> 360</td>
+            </tr>
+            <tr>
+              <th scope="row">s&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;w&nbsp;&nbsp;&nbsp;b</th>
+              <td>0 -> 100&nbsp;&nbsp;&nbsp;&nbsp;<em>or</em>&nbsp;&nbsp;&nbsp;&nbsp;0% -> 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">a</th>
+              <td>0.0 -> 1.0&nbsp;&nbsp;&nbsp;&nbsp;<em>or</em>&nbsp;&nbsp;&nbsp;&nbsp;0% -> 100%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cd-text">Note that the parameters are separated by whitespace and the optional alpha term is separated
+        by a solidus ("/").</p>
+      <p class="cd-text">Valid examples of color descriptors include <code>'rgb(90%&nbsp;95%&nbsp;10%)'</code>,
+        <code>'hsl(330&nbsp;50&nbsp;90 / 0.5)'</code>, <code>'hwb(270&nbsp;20&nbsp;35 / 30%)'</code>
+      </p>
+
+      <p class="cd-text"><b>RGB hexadecimal coded:</b></p>
+      <p class="cd-text">A color value is created by specifying each channel as a hexadecimal number in the range 00
+        to
+        FF (0 to 255 in decimal) then concatenating them into a string preceeded with a hash (#) i.e. '#RRGGBB'. To
+        include the channel its hexadecimal value must alse be concatenateed i.e. '#RRGGBBAA'</p>
+      <ul class="cd-ul list-unstyled">
+        <li class="cd-li"><code>'#FF00FF'</code> : red (255), green (0), blue(255) - purple.</li>
+        <li class="cd-li"><code>'#FF00FF20'</code> : red (255), green (0), blue(255), alpha (32) - translucent purple.
+        </li>
+      </ul>
+      <p class="cd-text"> A full description of RGB hexadecimal code values can be found <a
+          href="https://www.w3.org/TR/css-color-4/#hex-notation" target="_blank">here</a>.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@    Properties    -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE ATTRIBUTES</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Properties (getters)</p>
+        </div>
+      </div>
+      <p id="mode" class="ch-code">turtle.mode<br> </p>
+      <p class="cd-text">Returns the mode type &nbsp;-&nbsp;&nbsp;<code>DISPLAY, STANDARD, LOGO</code>. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="mode$" class="ch-code">turtle.mode$<br> </p>
+      <p class="cd-text">Returns the mode type as a string &nbsp;-&nbsp;&nbsp;"DISPLAY", "STANDARD", "LOGO". </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="hastasks" class="ch-code">turtle.hasTasks<br> </p>
+      <p class="cd-text">Returns <code>true</code> if the turtle still has tasks to complete. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="nbrtasks" class="ch-code">turtle.nbrTasks<br> </p>
+      <p class="cd-text">Returns the number of tasks still to complete. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="isactive" class="ch-code">turtle.isActive<br> </p>
+      <p class="cd-text">Returns <code>true</code> if the turtle is still being updated. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="isanimating" class="ch-code">turtle.isAnimating<br> </p>
+      <p class="cd-text">Returns <code>true</code> if animation is turned on. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="isvisible" class="ch-code">turtle.isVisible<br> </p>
+      <p class="cd-text">Returns <code>true</code> if the turtle cursor is visible. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="ispendown" class="ch-code">turtle.isPenDown<br> </p>
+      <p class="cd-text">Returns <code>true</code> if the pen is down and drawing lines. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="nbrstyles" class="ch-code">turtle.nbrStyles<br> </p>
+      <p class="cd-text">Returns the number of styles remaining on the stack. </p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@   MISCELLANEOUS   @@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>MISCCELLANEOUS</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Methods</p>
+        </div>
+      </div>
+
+      <p id="doclear" class="ch-code">turtle.doClear()<br> </p>
+      <p class="cd-text">
+        This will erase all graphics created by this turtle leaving a blank canvas. The turtle&apos;s position,
+        heading
+        and other attributes are unchanged.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="doreset" class="ch-code">turtle.doReset()<br> </p>
+      <p class="cd-text">
+        As well as erasing the current canvas; the turtle&apos;s position, heading and all other attributes are
+        returned
+        to their initial values.</p>
+      <div class="b-divider b-hr "></div>
+
+
+      <p id="interval" class="ch-code">turtle.setUpdateInterval()<br> </p>
+      <p class="cd-text">The turtle&apos;s state is updated every 25 milliseconds (default value). In most cases this
+        is
+        perfectly adequate but if the application has a lot of turtles it may improve performance if the interval is
+        increased. </p>
+      <p class="cd-text">The animation speed is independant of the update interval but my appear jerky at high
+        intervals.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="spawn" class="ch-code">turtle.spawn()<br> </p>
+      <p class="cd-text">
+        Returns a duplicate of this turtle.</p>
+      <div class="b-divider b-hr "></div>
+
+      <!--  End of content -->
+    </div>
+
+  </main>
+  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

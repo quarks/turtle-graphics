@@ -1,0 +1,269 @@
+/* BootStrap stuff */
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+
+main {
+  height: 100vh;
+  height: -webkit-fill-available;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.dropdown-toggle {
+  outline: 0;
+}
+
+.btn-toggle {
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: var(--bs-emphasis-color);
+  background-color: transparent;
+}
+
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+  background-color: var(--bs-tertiary-bg);
+}
+
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+}
+
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.btn-toggle-nav a {
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+}
+
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: var(--bs-tertiary-bg);
+}
+
+.scrollarea {
+  overflow-y: auto;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.b-divider {
+  width: 100%;
+  height: 3rem;
+  background-color: rgba(0, 0, 0, .1);
+  border: solid rgba(0, 0, 0, .15);
+  border-width: 1px 0;
+  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.b-vr {
+  flex-shrink: 0;
+  width: 0.75rem;
+  height: 100vh;
+}
+
+.b-hr {
+  flex-shrink: 0;
+  width: 100%;
+  height: 0.2rem;
+}
+
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.btn-bd-primary {
+  --bd-violet-bg: #712cf9;
+  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #6528e0;
+  --bs-btn-hover-border-color: #6528e0;
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #5a23c8;
+  --bs-btn-active-border-color: #5a23c8;
+}
+
+.bd-mode-toggle {
+  z-index: 1500;
+}
+
+.bd-mode-toggle .dropdown-menu .active .bi {
+  display: block !important;
+}
+
+/*  ############################################
+      Styles created for user guide
+    ############################################ */
+body {
+  background-color: linen;
+}
+
+.idx-code-link {
+  font-family: var(--bs-font-monospace) !important;
+  font-size: 0.95rem;
+  display: inline-flex !important;
+  text-decoration: none !important;
+  border-radius: var(--bs-border-radius) !important;
+  padding-left: 1.25rem !important;
+}
+
+.idx-text-link {
+  color: RGBA(var(--bs-emphasis-color-rgb), var(--bs-link-opacity, 1)) !important;
+  -webkit-text-decoration-color: RGBA(var(--bs-emphasis-color-rgb), var(--bs-link-underline-opacity, 1)) !important;
+  text-decoration-color: RGBA(var(--bs-emphasis-color-rgb), var(--bs-link-underline-opacity, 1)) !important;
+  font-size: 0.95rem;
+  display: inline-flex !important;
+  text-decoration: none !important;
+  border-radius: var(--bs-border-radius) !important;
+  padding-left: 1.25rem !important;
+}
+
+.cd-text {
+  font-weight: 400 !important;
+  padding-right: 3rem !important;
+  padding-left: 3rem !important;
+  color: black;
+}
+
+.cd-code {
+  font-weight: 500 !important;
+  font-family: var(--bs-font-monospace) !important;
+  font-size: 1em;
+  padding-right: 3rem !important;
+  padding-left: 4rem !important;
+  word-wrap: break-word;
+  color: var(--bs-code-color);
+}
+
+.cd-ul {
+  padding-right: 3rem !important;
+  padding-left: 5rem !important;
+}
+
+.cd-ol {
+  padding-right: 3rem !important;
+  padding-left: 5rem !important;
+}
+
+.ch-section-100 {
+  font-weight: 600 !important;
+  margin-top: 0.4rem !important;
+  margin-bottom: 0.1rem !important;
+  background-color: burlywood;
+  color: black;
+}
+
+.ch-section-left {
+  font-weight: 500 !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.4rem !important;
+  font-size: 1.2rem !important;
+  vertical-align: middle;
+  text-align: left;
+  color: saddlebrown;
+}
+
+.ch-section-right {
+  font-weight: 700 !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.4rem !important;
+  font-size: calc(1.25rem + 0.6vw) !important;
+  vertical-align: middle;
+  text-align: center;
+}
+
+
+
+.ch-section {
+  font-weight: 600 !important;
+  padding-right: 0.5rem !important;
+  padding-left: 0.5rem !important;
+  font-size: calc(1.25rem + 0.6vw) !important;
+  text-align: center;
+  background-color: burlywood;
+  color: black;
+}
+
+.ch-text {
+  font-weight: 600 !important;
+  padding-right: 0.5rem !important;
+  padding-left: 0.5rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  margin-top: 0.4rem !important;
+  background-color: moccasin;
+  color: black;
+}
+
+.ch-code {
+  font-weight: 500 !important;
+  font-family: var(--bs-font-monospace) !important;
+  padding-right: 0.5rem !important;
+  padding-left: 0.5rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  margin-top: 0.4rem !important;
+  background-color: moccasin;
+  color: var(--bs-black);
+}
+
+.mono {
+  font-weight: 500 !important;
+  font-family: var(--bs-font-monospace) !important;
+}
