@@ -281,6 +281,8 @@
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               <li><a href="#getspeed" class="idx-code-link">getSpeed()</a></li>
               <li><a href="#setspeed" class="idx-code-link">setSpeed()</a></li>
+              <li><a href="#setcursor" class="idx-code-link">setTurtle()</a></li>
+              <li><a href="#setcursor" class="idx-code-link">setCursor()</a></li>
             </ul>
           </div>
         </li>
@@ -823,14 +825,10 @@
         </div>
       </div>
 
-      <p id="turtle" class="ch-code">
-        turtle.turtle(cursor)<br>
-      </p>
-
+      <p id="turtle" class="ch-code"> turtle.turtle(cursor)<br> </p>
       <p class="cd-text">
         This default cursor is called <span class="mono">DART</span> but the library has several predefined cursors to
-        choose from they are :-
-      </p>
+        choose from they are :- </p>
       <figure class="text-center">
         <img src="cursors.png" class="figure-img img-fluid rounded" alt="library cursors">
         <figcaption class="figure-caption text-center">Predefined library cursors.</figcaption>
@@ -1303,8 +1301,16 @@
         <li>turtle&apos;s rotational speed (&deg;/s or radians/s)</li>
       </ul>
       <p class="cd-text">If either parameter value is <code>NaN</code> then the current value is unchanged.
-        The default rotational unit is degrees (&deg;) but chan be changed to <a href="#radians"
-          class="idx-code-link">radians</a>. </p>
+        The default rotational unit is degrees (&deg;) but chan be changed to <a href="#radians">radians</a>. </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="setcursor" class="ch-code">turtle.setTurtle()<br>turtle.setCursor()<br> </p>
+      <p class="cd-text">Change the turtle&apos;s cursor. The parameter <code>cursor</code> can be a library or user
+        defined cursor.</p>
+      <figure class="text-center">
+        <img src="cursors.png" class="figure-img img-fluid rounded" alt="library cursors">
+        <figcaption class="figure-caption text-center">Predefined library cursors.</figcaption>
+      </figure>
       <div class="b-divider b-hr "></div>
 
       <!-- @@@@@@@@@@@@@@    Graphics control    -->

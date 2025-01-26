@@ -1,11 +1,12 @@
 /*
             Turtle Graphics
 
-Version:    draft
+Version:    0.9.0
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 
             http://www.lagers.org.uk
+User guide: http://www.lagers.org.uk/tg/guide/guide.html
 */
 
 //  Simple class to hold an image to represent the turtle and the 

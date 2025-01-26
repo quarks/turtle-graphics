@@ -1,0 +1,59 @@
+<!--    
+    Build file for JS project
+    Peter Lager 2024
+    V0.1
+-->
+<project name="Turtle Graphics" default="init" basedir="./" >
+
+    <property file="build.properties" />
+
+    <!-- Temporary folder for intermdiate files created during documatation -->
+    <property name="temp" location="./temp" />
+    <property name="src_ts_temp" location="./src_ts_temp" />
+
+	<!-- Create the time stamp -->
+	<tstamp> 
+		<format property="date" pattern="d-MMMM-yyyy  hh:mm aa" />
+	</tstamp>
+
+    <!-- Create the library min.js file    -->
+    <target name="compile" depends="concat.js.files">        
+        <property name="gcc.src" location="${library.dist.lib.dir}/${library.filename.js}" />
+        <property name="gcc.dst" location="${library.dist.lib.dir}/${library.filename.min.js}" />
+        <property name="gcc.lang.in" value="--language_in ECMASCRIPT_2021" />
+        <property name="gcc.lang.out" value="--language_out ECMASCRIPT_NEXT" />
+        <property name="gcc.run.line" value="${gcc.src} --js_output_file ${gcc.dst}  ${gcc.lang.in} ${gcc.lang.out}" />
+        <echo message="Google Closure Compiler" />
+        <delete file="${gcc.dst}" />
+        <exec executable="npx">
+            <arg line="google-closure-compiler ${gcc.run.line}" />
+        </exec>
+        <delete dir="${temp}" />      
+    </target>
+
+    <!-- Concatenate the JavaScript files and store result in 'dist/lib/???.ts' -->
+    <target name="concat.js.files" depends="copy.js.files" >
+        <echo message="Concatenate JavaScript files into one ready for GCC" />
+        <!-- Concat order so that parent classes precede child classes  -->
+        <loadfile property="jslist" srcfile="${js.list.file}" />  
+        <concat destfile="${library.dist.lib.dir}/${library.filename.js}" fixlastline="true" > 
+            <header file="${jdoc.min}" ></header>
+            <filelist dir="${temp}" files="${jslist}" />
+        </concat>  
+    </target>
+
+     <!-- Copy all the the JavaScript files into 'temp' folder -->
+    <target name="copy.js.files" >
+        <echo message="Copying JavaScript files" />
+        <copy todir="${temp}" flatten="true" >
+            <!-- Remove any import statements (if any) -->
+            <filterchain>
+                <linecontains negate="true">
+                    <contains value="import" />
+                </linecontains>
+            </filterchain>
+            <fileset dir="${js.source.dir}" includes="**/*.js" />
+        </copy>
+    </target>
+
+</project>
