@@ -5,14 +5,10 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc",
     "gcc": "npx google-closure-compiler src_js/**.js --js_output_file dist/lib/gui.min.js --language_in ECMASCRIPT_2020 --language_out ECMASCRIPT_NEXT"
   },
   "author": "Peter Lager",
   "license": "MIT",
-  "dependencies": {
-    "typescript": "^5.7.3"
-  },
   "devDependencies": {
     "@types/p5": "^1.7.6",
     "google-closure-compiler": "^20240317.0.0",
