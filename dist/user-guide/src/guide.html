@@ -103,8 +103,8 @@
               <li><a href="#pencap" class="idx-code-link">pencap() cap()</a></li>
               <li><a href="#pencolor" class="idx-code-link">pencolor()</a></li>
               <li><a href="#fillcolor" class="idx-code-link">fillcolor()</a></li>
-              <li><a href="#stylestatus" class="idx-code-link">push_style()</a></li>
-              <li><a href="#stylestatus" class="idx-code-link">pop_style()</a></li>
+              <li><a href="#penstatus" class="idx-code-link">push_pen()</a></li>
+              <li><a href="#penstatus" class="idx-code-link">pop_pen()</a></li>
             </ul>
           </div>
         </li>
@@ -420,12 +420,9 @@
       <p class="cd-text">Turtle Graphics is a Javascript implementation of the popular geometric drawing tools
         introduced in Logo, developed by Wally Feurzeig, Seymour Papert and Cynthia Solomon in 1967.</p>
       <p class="cd-text">Imagine a robotic turtle starting at (0, 0) in the x-y plane. After creating a turtle, give
-        it
-        the command <code>turtle.forward(15)</code>, and it moves (on-screen!) 15 pixels in the direction it is
-        facing,
-        drawing a line as it moves. Give it the command turtle.right(25), and it rotates in-place 25 degrees
-        clockwise.
-      </p>
+        it the command <code>turtle.forward(15)</code>, and it moves (on-screen!) 15 pixels in the direction it is
+        facing, drawing a line as it moves. Give it the command <code>turtle.right(25)</code>, and it rotates in-place
+        25 degrees clockwise. </p>
       <p class="cd-text"> In this library, turtle graphics provides a representation of a physical “turtle” (a little
         robot with a pen) that draws on a sheet of paper on the floor.</p>
       <p class="cd-text">Turtle drawing was originally created as an educational tool, to be used by teachers in the
@@ -788,12 +785,18 @@
         Changes the color used to fill shapes created by the turtle.
       </p>
 
-      <p id="stylestatus" class="ch-code">
-        turtle.push_style()<br>
+      <p id="penstatus" class="ch-code">
+        turtle.push_pen()<br>
       </p>
-      <p class="cd-text">
-        Save the current pen style. This includes the following information :-
-      </p>
+      <p class="cd-text"> Push (save) the current pen&apos;s position and style on the stack. This includes the
+        following information :- </p>
+      <p class="cd-text"><b> Pen position:-</b> </p>
+      <ul class="cd-ul">
+        <li>X coordinate</li>
+        <li>Y coordinate</li>
+        <li>heading</li>
+      </ul>
+      <p class="cd-text"><b> Pen style:-</b> </p>
       <ul class="cd-ul">
         <li>whether the pen is up or down</li>
         <li>the pen size, dash-style and color</li>
@@ -804,12 +807,17 @@
         <li>tilt angle for the turtle cursor</li>
       </ul>
 
-      <p id="stylestatus" class="ch-code">
-        turtle.pop_style()<br>
+      <p id="penstatus" class="ch-code">
+        turtle.pop_pen(what = STYLE_POS)<br>
       </p>
-      <p class="cd-text">
-        Restore the pen style attributes saved by the last <code>push()</code> statment.
+      <p class="cd-text"> Restore the pen status saved by the last <code>push_pen()</code> statement. The parameter,
+        <code>what</code>, determines what attributes are restored -
       </p>
+      <ul class="cd-ul">
+        <li>STYLE&nbsp;&nbsp;: style attributes only</li>
+        <li>POS&nbsp;&nbsp;: position and heading attributes only</li>
+        <li>STYLE_POS&nbsp;&nbsp;: style, position and heading attributes (default value)</li>
+      </ul>
       <div class="b-divider b-hr "></div>
 
       <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

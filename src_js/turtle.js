@@ -15,6 +15,8 @@ const [DISPLAY, STANDARD, LOGO] =
     [Symbol.for('display'), Symbol.for('standard'), Symbol.for('logo')];
 const [BUTT, SQUARE, ROUND] =
     [Symbol.for('butt'), Symbol.for('square'), Symbol.for('round')];
+const [STYLE, POS, STYLE_POS] = [1, 2, 3];
+
 const [LT, RT] = [-1, 1]; // DO NOT CHANGE
 
 const [TG] = (function () {
@@ -61,14 +63,6 @@ const [TG] = (function () {
     const TASK_LISTS = new Map();
 
     class Turtle {
-        // static LINEAR_SPEED = 160;        // Pixels per second (160)
-        // static ANGULAR_SPEED = 3 * PI;    // Radians per second (1.5 * TAU)
-        // static PEN_COLOR = 'black';
-        // static FILL_COLOR = 'white';
-        // static PEN_SIZE = 2;
-        // static UPDATE_INTERVAL = 25;      // ms interval between updates
-        // static TASK_LISTS = new Map();
-
         static clearRecords() { TASK_LISTS.clear(); }
         static setRecord(id, record) { TASK_LISTS.set(id, record); }
         static hasRecord(id) { return TASK_LISTS.has(id); }
@@ -198,8 +192,8 @@ const [TG] = (function () {
 
         fillcolor(c) { return this._addTask(new Attribute('_fillColor', c)); }
 
-        push_style() { return this._addTask(new PenStyle(PUSH)); }
-        pop_style() { return this._addTask(new PenStyle(POP)); }
+        push_pen() { return this._addTask(new PenState(PUSH)); }
+        pop_pen(what = STYLE_POS) { return this._addTask(new PenState(POP, what)); }
 
         // ####  Turtle control  ##############################################
         turtle(cursor) {
@@ -378,7 +372,7 @@ const [TG] = (function () {
         get isFilling() { return this._fill_track; }
 
         get nbrTasks() { return this._taskQueue.length; }
-        get nbrStyles() { return this._styleStack.length; }
+        get nbrStyles() { return this._penStack.length; }
 
         get mode() { return this._mode; }
         get mode$() { return Symbol.keyFor(this._mode); }
@@ -437,7 +431,7 @@ const [TG] = (function () {
         _reset() {
             this._stopTurtle();
             this._taskQueue = [];
-            this._styleStack = [];
+            this._penStack = [];
             this._clear();
             this._autoStart = false;
             this._lnrSpeed = LINEAR_SPEED;
@@ -993,43 +987,59 @@ const [TG] = (function () {
     }   // End of Write class
 
 
-    class PenStyle extends Task {
+    class PenState extends Task {
         constructor(...info) {
             super(...info);
             this._action = info[0];
+            this._what = info[1];
         }
 
         perform(turtle, time) {
             this.recordManager(turtle);
+            let state;
             switch (this._action) {
                 case PUSH:
-                    let state = [
-                        turtle._penDown,
-                        turtle._penSize,
-                        [...turtle._penDash],
-                        turtle._penCap,
-                        turtle._penColor,
-                        turtle._fillColor,
-                        turtle._animate,
-                        turtle._csrVisible,
-                        turtle._tilt
-                    ]
-                    turtle._sS.push(state);
-                    break;
-                case POP:
-                    if (turtle.nbrStyles > 0) {
-                        let state = turtle._sS.pop();
-                        [
+                    state = {
+                        style: [
                             turtle._penDown,
                             turtle._penSize,
-                            turtle._penDash,
+                            [...turtle._penDash],
                             turtle._penCap,
                             turtle._penColor,
                             turtle._fillColor,
                             turtle._animate,
                             turtle._csrVisible,
                             turtle._tilt
-                        ] = state;
+                        ],
+                        position: [
+                            turtle._penX,
+                            turtle._penY,
+                            turtle._penA
+                        ]
+                    }
+                    turtle._penStack.push(state);
+                    break;
+                case POP:
+                    if (turtle.nbrStyles > 0) {
+                        state = turtle._penStack.pop();
+                        if (STYLE == (this._what & STYLE))
+                            [
+                                turtle._penDown,
+                                turtle._penSize,
+                                turtle._penDash,
+                                turtle._penCap,
+                                turtle._penColor,
+                                turtle._fillColor,
+                                turtle._animate,
+                                turtle._csrVisible,
+                                turtle._tilt
+                            ] = state.style;
+                        if (POS === (this._what & POS))
+                            [
+                                turtle._penX,
+                                turtle._penY,
+                                turtle._penA
+                            ] = state.position;
                     }
                     break;
             }
@@ -1037,6 +1047,10 @@ const [TG] = (function () {
         }
 
     }
+    // End of PenState
+    //  class
+
+
     class BeginRecord extends Task {
         constructor(...info) {
             super(...info);
@@ -1240,7 +1254,7 @@ const [TG] = (function () {
             this.setDONE();
             return time;
         }
-    }   // End of Teleport class
+    }   // End of GoTo class
 
     class Teleport extends Task {
         constructor(...info) {
