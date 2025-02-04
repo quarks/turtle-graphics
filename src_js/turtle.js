@@ -536,11 +536,6 @@ const [TG] = (function () {
     const MAX_ARC_LEN = 20;
 
     class Task {
-        // static WAITING = 64;
-        // static READY = 65;
-        // static DONE = 128;
-        // static MAX_ARC_LEN = 20;
-
         constructor(...info) {
             this._info = info;
             this.setDONE();
@@ -611,8 +606,9 @@ const [TG] = (function () {
                     timeLeft = (this._t - 1) * this._range * 1000 / this._angSpeed;
                     turtle._penA = normAngle(this._ea);
                 }
-                else
+                else {
                     turtle._penA = pt(this._t, this._sa, this._ea);
+                }
             }
             else {
                 this.setDONE();
@@ -1047,8 +1043,7 @@ const [TG] = (function () {
         }
 
     }
-    // End of PenState
-    //  class
+    // End of PenState  class
 
 
     class BeginRecord extends Task {
