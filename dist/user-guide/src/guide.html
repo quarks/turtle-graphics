@@ -679,14 +679,22 @@
       <div class="b-divider b-hr "></div>
 
       <p id="write" class="ch-code">
-        turtle.write(text, move = false, align = 'left', font : <i>optional</i>)<br>
+        turtle.write(text, align = 'left', move = false, font : <i>optional</i>)<br>
       </p>
       <p class="cd-text">
-        Write the string representation <code>text</code> at the current turtle position which will be on the text
-        baseline. The text can be aligned to the current turtle position according to <code>align</code>> (“left”,
-        “center” or “right”). If <code>move</code> is true, the pen is moved to the bottom-right corner of
-        the text.
-      </p>
+        Draw the string representation of <code>text</code> at the current turtle position. This image shows the affect
+        of the parameter values passed to the task.</p>
+      <figure class="text-center">
+        <img src="writealign.png" class="figure-img img-fluid rounded" alt="shows text alignment options">
+        <figcaption class="figure-caption text-center">Shows text alignment options.</figcaption>
+      </figure>
+      <p class="cd-text"> In the diagram the blue arrows indicate the position and heading of the turtle just before the
+        text is drawn. The text baseline (dashed line) is perpendicular to the tutle&apos;s heading. The text can be
+        aligned <code>"left"</code>, <code>"center"</code> or <code>"right"</code> to this position. Once the text is
+        drawn the <code>move</code> parameter determines whether the turtle is moved along the baseline to the end of
+        the text.</p>
+      <p class="cd-text">No matter which options are chosen the turtle&apos;s heading is unchanged and is shown by the
+        red dashed line.</p>
       <p class="cd-text">
         If no font descriptor is provided (<code>font</code>) then the default font is used.
       </p>
@@ -756,8 +764,7 @@
       </figure>
       <p class="cd-text">
         If <code>pattern</code> is an empty array or is not provided then all subsequent lines will be solid until a
-        new
-        dash pattern is specified. </p>
+        new dash pattern is specified. </p>
       <div class="b-divider b-hr "></div>
 
       <p id="pencap" class="ch-code">
