@@ -51,20 +51,18 @@ const [TG] = (function () {
         let y = cy + py * cosA + px * sinA;
         return [x, y];
     }
+    const now = () => { return performance.now() }
 
     const [FORWARD, BACKWARD, NEAREST] = [1, -1, 0];
     const [ABSOLUTE, RELATIVE] = [0, 1];
     const [PUSH, POP] = [1, -1];
     const FONT = '400 normal 14px sans-serif';
-
-    const now = () => { return performance.now() }
-
-    const LINEAR_SPEED = 160; // Pixels per second (160)
-    const ANGULAR_SPEED = 3 * PI;    // Radians per second (1.5 * TAU)
+    const LINEAR_SPEED = 160;       // Pixels per second (160)
+    const ANGULAR_SPEED = 3 * PI;   // Radians per second (1.5 * TAU)
     const PEN_COLOR = 'black';
     const FILL_COLOR = 'white';
     const PEN_SIZE = 2;
-    const UPDATE_INTERVAL = 25;      // ms interval between updates
+    const UPDATE_INTERVAL = 25;     // ms interval between updates
     const TASK_LISTS = new Map();
 
     class Turtle {
@@ -169,8 +167,8 @@ const [TG] = (function () {
 
         sleep(ms) { return this._addTask(new Sleep(ms)); }
 
-        write(string, move = false, align = 'left', font = undefined) {
-            return this._addTask(new Write(string, move, align, font));
+        write(string, align = 'left', move = false, font = undefined) {
+            return this._addTask(new Write(string, align, move, font));
         }
 
         font(style) { return this._addTask(new Attribute('_font', style)); }
@@ -541,11 +539,6 @@ const [TG] = (function () {
     const MAX_ARC_LEN = 20;
 
     class Task {
-        // static WAITING = 64;
-        // static READY = 65;
-        // static DONE = 128;
-        // static MAX_ARC_LEN = 20;
-
         constructor(...info) {
             this._info = info;
             this.setDONE();
@@ -616,8 +609,9 @@ const [TG] = (function () {
                     timeLeft = (this._t - 1) * this._range * 1000 / this._angSpeed;
                     turtle._penA = normAngle(this._ea);
                 }
-                else
+                else {
                     turtle._penA = pt(this._t, this._sa, this._ea);
+                }
             }
             else {
                 this.setDONE();
@@ -939,16 +933,16 @@ const [TG] = (function () {
         constructor(...info) {
             super(...info);
             this._text = info[0];
-            this._move = info[1];
-            this._align = info[2];
+            this._align = info[1];
+            this._move = info[2];
             this._font = info[3];
             this.setWAITING();
         }
 
         init(turtle) {
             this.recordManager(turtle);
-            [this._sx, this._sy, this._fillColor, this._mode, this._penDown] =
-                [turtle._penX, turtle._penY, turtle._fillColor, turtle._mode, turtle._penDown];
+            [this._sx, this._sy, this._pa, this._fillColor, this._mode, this._penDown] =
+                [turtle._penX, turtle._penY, turtle._penA, turtle._fillColor, turtle._mode, turtle._penDown];
             this._align = this._align === 'center' || this._align === 'right'
                 ? this._align : 'left';
             this._font = this._font ?? turtle._font;
@@ -962,10 +956,22 @@ const [TG] = (function () {
                 turtle._bdc.font = this._font;
                 let tw = turtle._bdc.measureText(this._text).width;
                 if (this._align === 'center') tw /= 2;
-                let task = this._mode === LOGO
-                    ? new GoTo(this._sy + tw, this._sx)
-                    : new GoTo(this._sx + tw, this._sy);
-                turtle._injectTasks([task]);
+                let twx = tw * sin(turtle._penA), twy = tw * cos(turtle._penA);
+                switch (this._mode) {
+                    case LOGO:
+                        turtle._penX = this._sx - twx;
+                        turtle._penY = this._sy + twy;
+                        break;
+                    case STANDARD:
+                        turtle._penX = this._sx + twx;
+                        turtle._penY = this._sy - twy;
+                        break;
+                    case DISPLAY:
+                        turtle._penX = this._sx - twx;
+                        turtle._penY = this._sy + twy;
+                        break;
+
+                }
             }
             this.setDONE();
         }
@@ -978,14 +984,22 @@ const [TG] = (function () {
             dc.textAlign = this._align;
             dc.textBaseline = 'bottom'
             dc.fillStyle = this._fillColor;
-            switch (this._mode) {
-                case LOGO:
-                    dc.rotate(HALF_PI);
-                    break;
-                case STANDARD:
-                    dc.scale(1, -1);
-                    break;
+            dc.rotate(this._pa + HALF_PI);
+            if (this._mode === STANDARD) {
+                dc.rotate(-PI);
+                dc.scale(1, -1);
             }
+            // switch (this._mode) {
+            //     case LOGO:
+            //     case DISPLAY:
+            //         // dc.rotate(HALF_PI);
+            //         break;
+            //     case STANDARD:
+            //         dc.rotate(-PI);
+            //         dc.scale(1, -1);
+
+            //         break;
+            // }
             dc.fillText(this._text, 0, 0);
             dc.restore();
         }
@@ -1027,6 +1041,7 @@ const [TG] = (function () {
                 case POP:
                     if (turtle.nbrStyles > 0) {
                         state = turtle._penStack.pop();
+
                         if (STYLE == (this._what & STYLE))
                             [
                                 turtle._penDown,
@@ -1052,8 +1067,7 @@ const [TG] = (function () {
         }
 
     }
-    // End of PenState
-    //  class
+    // End of PenState  class
 
 
     class BeginRecord extends Task {
