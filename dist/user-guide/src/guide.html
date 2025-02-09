@@ -103,8 +103,8 @@
               <li><a href="#pencap" class="idx-code-link">pencap() cap()</a></li>
               <li><a href="#pencolor" class="idx-code-link">pencolor()</a></li>
               <li><a href="#fillcolor" class="idx-code-link">fillcolor()</a></li>
-              <li><a href="#penstatus" class="idx-code-link">push_pen()</a></li>
-              <li><a href="#penstatus" class="idx-code-link">pop_pen()</a></li>
+              <li><a href="#penpush" class="idx-code-link">push_pen()</a></li>
+              <li><a href="#penpop" class="idx-code-link">pop_pen()</a></li>
             </ul>
           </div>
         </li>
@@ -707,6 +707,7 @@
         Set the default font style for this turtle. This style will be used in future <code>write</code> tasks until
         changed.
       </p>
+      <div class="b-divider b-hr "></div>
 
       <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
            @@@@@@@@@@@@@@    PEN CONTROL   @@@@@@@@@@@@@@@@@@@@
@@ -792,11 +793,14 @@
       <p id="fillcolor" class="ch-code">
         turtle.fillcolor(color)<br>
       </p>
+      <div class="b-divider b-hr "></div>
+
       <p class="cd-text">
         Changes the color used to fill shapes created by the turtle.
       </p>
+      <div class="b-divider b-hr "></div>
 
-      <p id="penstatus" class="ch-code">
+      <p id="penpush" class="ch-code">
         turtle.push_pen()<br>
       </p>
       <p class="cd-text"> Push (save) the current pen&apos;s position and style on the stack. This includes the
@@ -816,13 +820,14 @@
         <li>whether to trace (animate) the movement</li>
         <li>whether the turtle cursor is visible or not</li>
         <li>tilt angle for the turtle cursor</li>
+        <li>the pen&apos;s linear and rotational speeds</li>
       </ul>
 
-      <p id="penstatus" class="ch-code">
+      <p id="penpop" class="ch-code">
         turtle.pop_pen(what = STYLE_POS)<br>
       </p>
       <p class="cd-text"> Restore the pen status saved by the last <code>push_pen()</code> statement. The parameter,
-        <code>what</code>, determines what attributes are restored -
+        <code>what</code>, determines which attributes are restored -
       </p>
       <ul class="cd-ul">
         <li>STYLE&nbsp;&nbsp;: style attributes only</li>
@@ -891,8 +896,8 @@
         <li>turtle&apos;s rotational speed (&deg;/s or radians/s)</li>
       </ul>
       <p class="cd-text">If either parameter value is <code>NaN</code> then the current value is unchanged. The
-        default
-        rotational unit is degrees (&deg;) but chan be changed to <a href="#radians" class="idx-code-link">radians</a>.
+        default rotational unit is degrees (&deg;) but can be changed to
+        <a href="#radians" class="cd-code-link">radians</a>.
       </p>
       <div class="b-divider b-hr "></div>
 

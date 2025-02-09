@@ -57,8 +57,8 @@ const [TG] = (function () {
     const [ABSOLUTE, RELATIVE] = [0, 1];
     const [PUSH, POP] = [1, -1];
     const FONT = '400 normal 14px sans-serif';
-    const LINEAR_SPEED = 160;       // Pixels per second (160)
-    const ANGULAR_SPEED = 3 * PI;   // Radians per second (1.5 * TAU)
+    const LINEAR_SPEED = 200;       // Pixels per second (200)
+    const ANGULAR_SPEED = 5 * PI;   // Radians per second (2.5 * TAU)
     const PEN_COLOR = 'black';
     const FILL_COLOR = 'white';
     const PEN_SIZE = 2;
@@ -970,7 +970,6 @@ const [TG] = (function () {
                         turtle._penX = this._sx - twx;
                         turtle._penY = this._sy + twy;
                         break;
-
                 }
             }
             this.setDONE();
@@ -989,17 +988,6 @@ const [TG] = (function () {
                 dc.rotate(-PI);
                 dc.scale(1, -1);
             }
-            // switch (this._mode) {
-            //     case LOGO:
-            //     case DISPLAY:
-            //         // dc.rotate(HALF_PI);
-            //         break;
-            //     case STANDARD:
-            //         dc.rotate(-PI);
-            //         dc.scale(1, -1);
-
-            //         break;
-            // }
             dc.fillText(this._text, 0, 0);
             dc.restore();
         }
@@ -1028,7 +1016,9 @@ const [TG] = (function () {
                             turtle._fillColor,
                             turtle._animate,
                             turtle._csrVisible,
-                            turtle._tilt
+                            turtle._tilt,
+                            turtle._lnrSpeed,
+                            turtle._angSpeed
                         ],
                         position: [
                             turtle._penX,
@@ -1052,7 +1042,9 @@ const [TG] = (function () {
                                 turtle._fillColor,
                                 turtle._animate,
                                 turtle._csrVisible,
-                                turtle._tilt
+                                turtle._tilt,
+                                turtle._lnrSpeed,
+                                turtle._angSpeed
                             ] = state.style;
                         if (POS === (this._what & POS))
                             [
