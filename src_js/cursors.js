@@ -1,7 +1,7 @@
 /*
             Turtle Graphics
 
-Version:    0.9.0
+Version:    0.9.1
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 

@@ -1,12 +1,12 @@
  /**
  * @preserve Turtle-Graphics    (c) Peter Lager  2025
  * @license MIT
- * @version 0.9.0
+ * @version 0.9.1
  */
 /*
             Turtle Graphics
 
-Version:    0.9.0
+Version:    0.9.1
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 
@@ -115,6 +115,25 @@ const [TG] = (function () {
                 mdc.drawImage(this._cursor.icon, -this._cursor.hitX, -this._cursor.hitY);
             }
             mdc.restore();
+        }
+
+        _getCopy() {
+            let b = turtle._b;
+            let bw = b.width, bh = b.height;
+            let bw2 = bw / 2, bh2 = bh / 2;
+            let s = new OffscreenCanvas(b.width, b.height);
+            let sdc = s.getContext('2d');
+            sdc.translate(b.width / 2, b.height / 2);
+            switch (turtle._mode) {
+                case LOGO:
+                    sdc.rotate(-HALF_PI);
+                    break;
+                case STANDARD:
+                    sdc.scale(1, -1);
+                    break;
+            }
+            sdc.drawImage(b, 0, 0, bw, bh, -bw2, -bh2, bw, bh);
+            return s;
         }
 
         // ####  Pen Movement  ################################################
@@ -351,7 +370,8 @@ const [TG] = (function () {
         }
 
         getSnapshot(snapId) {
-            return this._snapshots.get(snapId);
+            let snap = this._snapshots.get(snapId);
+            return snap ? snap : this._getCopy();
         }
 
         setTurtle(cursor) {
@@ -380,6 +400,9 @@ const [TG] = (function () {
         get mode() { return this._mode; }
         get mode$() { return Symbol.keyFor(this._mode); }
 
+        get width() { return this._b.width; }
+        get height() { return this._b.height; }
+        get aspect() { return this._b.width / this._b.height };
         // ####  Turtle <> System  ############################################
         spawn() {
             let t = new Turtle(this._b.width, this._b.height, this._mode);
@@ -1358,24 +1381,8 @@ const [TG] = (function () {
 
         perform(turtle, time) {
             this.recordManager(turtle);
-            if (typeof this._id === 'string' && this._id.length > 0) {
-                let b = turtle._b;
-                let bw = b.width, bh = b.height;
-                let bw2 = bw / 2, bh2 = bh / 2;
-                let s = new OffscreenCanvas(b.width, b.height);
-                let sdc = s.getContext('2d');
-                sdc.translate(b.width / 2, b.height / 2);
-                switch (turtle._mode) {
-                    case LOGO:
-                        sdc.rotate(-HALF_PI);
-                        break;
-                    case STANDARD:
-                        sdc.scale(1, -1);
-                        break;
-                }
-                sdc.drawImage(b, 0, 0, bw, bh, -bw2, -bh2, bw, bh);
-                turtle._snapshots.set(this._id, s);
-            }
+            if (typeof this._id === 'string' && this._id.length > 0)
+                turtle._snapshots.set(this._id, turtle._getCopy());
             this.setDONE();
             return time;
         }
@@ -1426,7 +1433,7 @@ const [TG] = (function () {
 /*
             Turtle Graphics
 
-Version:    0.9.0
+Version:    0.9.1
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 
@@ -1441,14 +1448,16 @@ User guide: http://www.lagers.org.uk/tg/guide/guide.html
 
 // Create a p5js Image from a turtle snaphot (OffscreenCanvas)
 function getImageFromOsc(osc, p = p5.instance) {
-    let ssdc = osc.getContext('2d');
-    let buffer = ssdc.getImageData(0, 0, osc.width, osc.height).data;
-    let array = new Uint32Array(buffer);
-    let img = p.createImage(osc.width, osc.height);
-    img.loadPixels();
-    img.pixels.forEach((v, i, a) => a[i] = array[i]);
-    img.updatePixels();
-    return img
+    if (osc) {
+        let ssdc = osc.getContext('2d');
+        let buffer = ssdc.getImageData(0, 0, osc.width, osc.height).data;
+        let array = new Uint32Array(buffer);
+        let img = p.createImage(osc.width, osc.height);
+        img.loadPixels();
+        img.pixels.forEach((v, i, a) => a[i] = array[i]);
+        img.updatePixels();
+        return img;
+    }
 }
 
 // create a turtle cursor from a p5.Image object. Commonly this image would have
@@ -1482,7 +1491,7 @@ const getArray2D = function (dim0 = 1, dim1 = 1, fv = 0) {
 /*
             Turtle Graphics
 
-Version:    0.9.0
+Version:    0.9.1
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 

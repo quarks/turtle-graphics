@@ -352,6 +352,7 @@
           </button>
           <div class="collapse" id="attr-properties-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#bsize" class="idx-code-link">turtle.width turtle.height turtle.aspect</a></li>
               <li><a href="#mode" class="idx-code-link">mode</a></li>
               <li><a href="#mode$" class="idx-code-link">mode$</a></li>
               <li><a href="#hastasks" class="idx-code-link">hasTasks</a></li>
@@ -1360,13 +1361,12 @@
       </p>
       <div class="b-divider b-hr "></div>
 
-      <p id="getsnapshot" class="ch-code">turtle.getSnapshot(id)<br> </p>
-      <p class="cd-text">Get the saved image with the specified <code>id</code>. The returned image will be of type
-        <code>OffscreenCanvas</code>.
+      <p id="getsnapshot" class="ch-code">turtle.getSnapshot(id : <i>optional</i>)<br> </p>
+      <p class="cd-text">Get the image saved with the specified <code>id</code>. If there is no matching image or if
+        <code>id</code> is unspecified a copy of the current turtle graphic is returned.
       </p>
-      <p class="cd-text">If this turtle has no image named <code>id</code> then this function returns
-        <code>undefined</code>
-      </p>
+      <p class="cd-text">The returned image will be of type <code>OffscreenCanvas</code>. </p>
+      <div class="b-divider b-hr "></div>
 
       <p id="getimagefromosc" class="ch-code">turtle.getImageFromOsc(osc, p)<br> </p>
       <p class="cd-text">A p5js helper function to convert a OffscreenCanvas (<code>osc</code>) image to a Processing
@@ -1578,6 +1578,10 @@
           <p>Properties (getters)</p>
         </div>
       </div>
+      <p id="bsize" class="ch-code">turtle.width<br>turtle.height<br>turtle.aspect<br> </p>
+      <p class="cd-text">Returns the width, height or aspect ratio (width / height) of the turtle graphic. </p>
+      <div class="b-divider b-hr "></div>
+
       <p id="mode" class="ch-code">turtle.mode<br> </p>
       <p class="cd-text">Returns the mode type &nbsp;-&nbsp;&nbsp;<code>DISPLAY, STANDARD, LOGO</code>. </p>
       <div class="b-divider b-hr "></div>

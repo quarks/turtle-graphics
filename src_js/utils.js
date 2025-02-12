@@ -1,7 +1,7 @@
 /*
             Turtle Graphics
 
-Version:    0.9.0
+Version:    0.9.1
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 
@@ -16,14 +16,16 @@ User guide: http://www.lagers.org.uk/tg/guide/guide.html
 
 // Create a p5js Image from a turtle snaphot (OffscreenCanvas)
 function getImageFromOsc(osc, p = p5.instance) {
-    let ssdc = osc.getContext('2d');
-    let buffer = ssdc.getImageData(0, 0, osc.width, osc.height).data;
-    let array = new Uint32Array(buffer);
-    let img = p.createImage(osc.width, osc.height);
-    img.loadPixels();
-    img.pixels.forEach((v, i, a) => a[i] = array[i]);
-    img.updatePixels();
-    return img
+    if (osc) {
+        let ssdc = osc.getContext('2d');
+        let buffer = ssdc.getImageData(0, 0, osc.width, osc.height).data;
+        let array = new Uint32Array(buffer);
+        let img = p.createImage(osc.width, osc.height);
+        img.loadPixels();
+        img.pixels.forEach((v, i, a) => a[i] = array[i]);
+        img.updatePixels();
+        return img;
+    }
 }
 
 // create a turtle cursor from a p5.Image object. Commonly this image would have
