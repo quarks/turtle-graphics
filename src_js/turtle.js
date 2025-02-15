@@ -136,7 +136,8 @@ const [TG] = (function () {
         y(ny, fill_gap = false) { return this._addTask(new Teleport(ABSOLUTE, NaN, ny, fill_gap)); }
         xy(nx, ny, fill_gap = false) { return this._addTask(new Teleport(ABSOLUTE, nx, ny, fill_gap)); }
         dxy(dx, dy, fill_gap = false) { return this._addTask(new Teleport(RELATIVE, dx, dy, fill_gap)); }
-        face(a) { return this._addTask(new Attribute('_penA', this._fix(a))); }
+        f(a) { return this._addTask(new Attribute('_penA', this._fix(a))); }
+        face(a) { return this.f(a); }
 
         fd(d) { return this._addTask(new Move(d, FORWARD)); }
         forward(d) { return this.fd(d); }
