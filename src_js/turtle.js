@@ -1,7 +1,7 @@
 /*
             Turtle Graphics
 
-Version:    0.9.1
+Version:    !!VERSION!!
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 
@@ -17,14 +17,11 @@ const [BUTT, SQUARE, ROUND] =
     [Symbol.for('butt'), Symbol.for('square'), Symbol.for('round')];
 const [STYLE, POS, STYLE_POS] = [1, 2, 3];
 
-const [LT, RT] = [-1, 1]; // DO NOT CHANGE
+const [LT, CT, RT, JT] = [-1, 0, 1, 2]; // DO NOT CHANGE
 
 const [TG] = (function () {
-    const [abs, atan2, ceil, cos, max, sign, sin, sqrt] =
-        [Math.abs, Math.atan2, Math.ceil, Math.cos, Math.max,
-        Math.sign, Math.sin, Math.sqrt];
-    const [PI, HALF_PI, TAU] = [Math.PI, Math.PI / 2, Math.PI * 2];
-
+    const { PI, abs, atan2, ceil, cos, max, sign, sin, sqrt } = Math;
+    const [HALF_PI, TAU] = [Math.PI / 2, Math.PI * 2];
     const radToDeg = (rads) => (rads * 180 / PI);
     const degToRad = (degs) => (degs * PI / 180);
     const distance = (x0, y0, x1, y1) => Math.sqrt((x1 - x0) ** 2 + (y1 - y0) ** 2);
@@ -651,7 +648,7 @@ const [TG] = (function () {
 
         init(turtle) {
             this.recordManager(turtle);
-            [this._fillStyle, this._strokeStyle, this._lineWidth, this._penDown] =
+            [this._fillStyle, this._strokeStyle, this._penSize, this._penDown] =
                 [turtle._fillColor, turtle._penColor, turtle._penSize, turtle._penDown];
             this._lineCap = Symbol.keyFor(turtle._penCap);
             this._lineDash = [] = [...turtle._penDash];
@@ -703,7 +700,7 @@ const [TG] = (function () {
             dc.translate(offX / 2, offY / 2)
             dc.fillStyle = this._fillStyle;
             dc.strokeStyle = this._strokeStyle;
-            dc.lineWidth = this._lineWidth;
+            dc.lineWidth = this._penSize;
             dc.lineCap = this._lineCap;
             dc.setLineDash(this._lineDash);
             dc.beginPath();
@@ -962,8 +959,16 @@ const [TG] = (function () {
             this.recordManager(turtle);
             [this._sx, this._sy, this._pa, this._fillColor, this._mode, this._penDown] =
                 [turtle._penX, turtle._penY, turtle._penA, turtle._fillColor, turtle._mode, turtle._penDown];
-            this._align = this._align === 'center' || this._align === 'right'
-                ? this._align : 'left';
+            switch (this._align) {
+                case 'right':
+                case RT:
+                    this._align = 'right'; break;
+                case 'center':
+                case CT:
+                    this._align = 'center'; break;
+                default:
+                    this._align = 'left';
+            }
             this._font = this._font ?? turtle._font;
             this.setREADY();
         }
@@ -1000,7 +1005,7 @@ const [TG] = (function () {
             dc.translate(this._sx + offX / 2, this._sy + offY / 2);
             dc.font = this._font
             dc.textAlign = this._align;
-            dc.textBaseline = 'bottom'
+            dc.textBaseline = 'bottom';
             dc.fillStyle = this._fillColor;
             dc.rotate(this._pa + HALF_PI);
             if (this._mode === STANDARD) {

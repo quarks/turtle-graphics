@@ -1,0 +1,6 @@
+ /**
+ * @preserve Turtle-Text    (c) Peter Lager  2025
+ * @license MIT
+ * @version !!VERSION!!
+ */
+ 

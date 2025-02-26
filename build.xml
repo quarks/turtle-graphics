@@ -1,7 +1,7 @@
 <!--    
     Build file for JS project
-    Peter Lager 2024
-    V0.1
+    Peter Lager 2025
+    V0.2
 -->
 <project name="Turtle Graphics" default="init" basedir="./" >
 
@@ -17,9 +17,9 @@
 	</tstamp>
 
     <!-- Create the library min.js file    -->
-    <target name="compile" depends="concat.js.files">        
-        <property name="gcc.src" location="${library.dist.lib.dir}/${library.filename.js}" />
-        <property name="gcc.dst" location="${library.dist.lib.dir}/${library.filename.min.js}" />
+    <target name="tg.compile" depends="tg.concat.js.files">        
+        <property name="gcc.src" location="${tg.dist.dir}/${tg.file.js}" />
+        <property name="gcc.dst" location="${tg.dist.dir}/${tg.file.min.js}" />
         <property name="gcc.lang.in" value="--language_in ECMASCRIPT_2021" />
         <property name="gcc.lang.out" value="--language_out ECMASCRIPT_NEXT" />
         <property name="gcc.run.line" value="${gcc.src} --js_output_file ${gcc.dst}  ${gcc.lang.in} ${gcc.lang.out}" />
@@ -32,18 +32,22 @@
     </target>
 
     <!-- Concatenate the JavaScript files and store result in 'dist/lib/???.ts' -->
-    <target name="concat.js.files" depends="copy.js.files" >
+    <target name="tg.concat.js.files" depends="tg.copy.js.files" >
         <echo message="Concatenate JavaScript files into one ready for GCC" />
         <!-- Concat order so that parent classes precede child classes  -->
-        <loadfile property="jslist" srcfile="${js.list.file}" />  
-        <concat destfile="${library.dist.lib.dir}/${library.filename.js}" fixlastline="true" > 
-            <header file="${jdoc.min}" ></header>
+        <loadfile property="jslist" srcfile="${tg.list.file}" />  
+        <!-- Concatenated file -->
+        <property name="jsfile" value="${tg.dist.dir}/${tg.file.js}" />
+        <concat destfile="${jsfile}" fixlastline="true" >
+            <header file="${tg.header.min}" ></header>
             <filelist dir="${temp}" files="${jslist}" />
         </concat>  
+        <!-- Set version number -->
+        <replace file="${jsfile}" token="!!VERSION!!" value="${lib.version}" />
     </target>
 
      <!-- Copy all the the JavaScript files into 'temp' folder -->
-    <target name="copy.js.files" >
+    <target name="tg.copy.js.files" >
         <echo message="Copying JavaScript files" />
         <copy todir="${temp}" flatten="true" >
             <!-- Remove any import statements (if any) -->
@@ -52,8 +56,41 @@
                     <contains value="import" />
                 </linecontains>
             </filterchain>
-            <fileset dir="${js.source.dir}" includes="**/*.js" />
+            <fileset dir="${js.src.dir}" includes="**/*.js" />
         </copy>
     </target>
+
+    <!-- Turtle text extension  -->
+
+    <!-- Create the turtle text min.js file    -->
+    <target name="tt.compile" depends="tt.prep.files">        
+        <property name="gcc.src" location="${tt.dist.dir}/${tt.file.js}" />
+        <property name="gcc.dst" location="${tt.dist.dir}/${tt.file.min.js}" />
+        <property name="gcc.lang.in" value="--language_in ECMASCRIPT_2021" />
+        <property name="gcc.lang.out" value="--language_out ECMASCRIPT_NEXT" />
+        <property name="gcc.run.line" value="${gcc.src} --js_output_file ${gcc.dst}  ${gcc.lang.in} ${gcc.lang.out}" />
+        <echo message="Google Closure Compiler" />
+        <delete file="${gcc.dst}" />
+        <exec executable="npx">
+            <arg line="google-closure-compiler ${gcc.run.line}" />
+        </exec>     
+    </target>
+
+    <!-- Copy all the the JavaScript files into 'temp' folder -->
+    <target name="tt.prep.files" >
+        <echo message="Preparing Turtle Text files" />
+        <concat destfile="${tt.dist.dir}/${tt.file.js}" fixlastline="true" >
+            <header file="${tt.header.min}" ></header>
+            <filelist dir="" files="${js.src.dir}/${tt.src.file}" />
+        </concat>
+        <!-- Set version number -->
+        <replace file="${tt.dist.dir}/${tt.file.js}" token="!!VERSION!!" value="${tt.version}" />
+    </target>
+
+    <target name="zip.guide">
+        <echo message="Preparing Turtle Text files" />
+        <zip destfile="${guide.dest.dir}/${guide.dest.file}" basedir="${guide.src.dir}" />
+    </target>
+
 
 </project>

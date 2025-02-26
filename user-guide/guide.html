@@ -253,8 +253,8 @@
           <div class="collapse" id="attr-pencontrol-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 
-              <li><a href="#getpensize" class="idx-code-link">getPensize()</a></li>
-              <li><a href="#setpensize" class="idx-code-link">setPensize()</a></li>
+              <li><a href="#getpensize" class="idx-code-link">getPenSize()</a></li>
+              <li><a href="#setpensize" class="idx-code-link">setPenSize()</a></li>
 
               <li><a href="#getpencolor" class="idx-code-link">getPenColor()</a></li>
               <li><a href="#setpencolor" class="idx-code-link">setPenColor()</a></li>
@@ -691,15 +691,16 @@
         <figcaption class="figure-caption text-center">Shows text alignment options.</figcaption>
       </figure>
       <p class="cd-text"> In the diagram the blue arrows indicate the position and heading of the turtle just before the
-        text is drawn. The text baseline (dashed line) is perpendicular to the tutle&apos;s heading. The text can be
-        aligned <code>"left"</code>, <code>"center"</code> or <code>"right"</code> to this position. Once the text is
-        drawn the <code>move</code> parameter determines whether the turtle is moved along the baseline to the end of
-        the text.</p>
+        text is drawn. The text baseline (dashed line) is perpendicular to the tutle&apos;s heading.
+        The text can be aligned <code>"left"</code>, <code>"center"</code> or <code>"right"</code> to this position.
+        Since V0.9.2 the values <code>LT</code>, <code>CT</code> and <code>RT</code> can be used as alternatives for the
+        <code>align</code> parameter. Once the text is drawn the <code>move</code> parameter determines whether the
+        turtle is moved along the baseline to the end of the text.
+      </p>
       <p class="cd-text">No matter which options are chosen the turtle&apos;s heading is unchanged and is shown by the
         red dashed line.</p>
       <p class="cd-text">
-        If no font descriptor is provided (<code>font</code>) then the default font is used.
-      </p>
+        If no font descriptor is provided (<code>font</code>) then the default font is used. </p>
       <div class="b-divider b-hr "></div>
 
       <p id="font" class="ch-code">
