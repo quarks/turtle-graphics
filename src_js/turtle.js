@@ -199,7 +199,6 @@ const [TG] = (function () {
         dash(ld = [], off = 0) {
             this._addTask(new Attribute('_dash', ld));
             this._addTask(new Attribute('_dashOffset', off));
-            console.log(ld, off)
             return this;
         }
         pendash(ld = []) { return this.dash(ld); }
