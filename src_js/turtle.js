@@ -196,7 +196,12 @@ const [TG] = (function () {
 
         pensize(pw = 2) { return this._addTask(new Attribute('_penSize', pw)); }
 
-        dash(ld = []) { this._addTask(new Attribute('_penDash', ld)); return this; }
+        dash(ld = [], off = 0) {
+            this._addTask(new Attribute('_dash', ld));
+            this._addTask(new Attribute('_dashOffset', off));
+            console.log(ld, off)
+            return this;
+        }
         pendash(ld = []) { return this.dash(ld); }
 
         // 'butt' 'square 'round'
@@ -330,11 +335,11 @@ const [TG] = (function () {
         getPenSize() { return this._penSize; }
 
         setDash(dash = []) {
-            if (Array.isArray(dash)) this._penDash = dash;
-            // this._penDash = Array.isArray(dash) ? [...dash] : [];
+            if (Array.isArray(dash)) this._dash = dash;
+            // this._dash = Array.isArray(dash) ? [...dash] : [];
             return this;
         }
-        getDash() { return this._penDash; }
+        getDash() { return this._dash; }
 
         setPenColor(col) { this._penColor = col; return this; }
         getPenColor() { return this._penColor; }
@@ -403,7 +408,7 @@ const [TG] = (function () {
             for (let key of Object.keys(this))
                 if (typeof this[key] != 'object')
                     t[key] = this[key];
-            t._penDash = [... this._penDash];
+            t._dash = [... this._dash];
             t._cursor = this._cursor;
             // reset some attributes
             t._poly_points = []; t._poly_track = false;
@@ -459,7 +464,9 @@ const [TG] = (function () {
             this._penColor = PEN_COLOR;
             this._penSize = PEN_SIZE;
             this._penX = 0; this._penY = 0; this._penA = 0;
-            this._penDown = true; this._penDash = [];
+            this._penDown = true;
+            this._dash = [];
+            this._dashOffset = 0;
             this._penCap = ROUND;
             this._csrVisible = true;
             this._animate = true;
@@ -651,7 +658,8 @@ const [TG] = (function () {
             [this._fillStyle, this._strokeStyle, this._penSize, this._penDown] =
                 [turtle._fillColor, turtle._penColor, turtle._penSize, turtle._penDown];
             this._lineCap = Symbol.keyFor(turtle._penCap);
-            this._lineDash = [] = [...turtle._penDash];
+            this._lineDash = [] = [...turtle._dash];
+            this._lineDashOffset = turtle._dashOffset;
             [this._sx, this._sy, this._ang] = [turtle._penX, turtle._penY, turtle._penA];
             this._ex = this._sx + this._dir * this._length * cos(this._ang);
             this._ey = this._sy + this._dir * this._length * sin(this._ang);
@@ -703,6 +711,7 @@ const [TG] = (function () {
             dc.lineWidth = this._penSize;
             dc.lineCap = this._lineCap;
             dc.setLineDash(this._lineDash);
+            dc.lineDashOffset = this._lineDashOffset;
             dc.beginPath();
             dc.moveTo(this._sx, this._sy);
             dc.lineTo(this._tx, this._ty)
@@ -786,7 +795,8 @@ const [TG] = (function () {
                 [turtle._fillColor, turtle._penColor, turtle._penSize, turtle._penDown];
             this._lineCap = Symbol.keyFor(turtle._penCap);
             [this._sx, this._sy, this._penA] = [turtle._penX, turtle._penY, turtle._penA];
-            this._lineDash = [] = [...turtle._penDash];
+            this._lineDash = [] = [...turtle._dash];
+            this._lineDashOffset = turtle._dashOffset;
             // Find centre of the arc / circle
             this._cx = this._sx - this._turn * this._b * sin(this._penA);
             this._cy = this._sy + this._turn * this._b * cos(this._penA);
@@ -857,6 +867,7 @@ const [TG] = (function () {
             dc.lineWidth = this._lineWidth;
             dc.lineCap = this._lineCap;
             dc.setLineDash(this._lineDash);
+            dc.lineDashOffset = this._lineDashOffset;
             dc.beginPath();
             dc.ellipse(this._cx, this._cy, this._a, this._b, this._era, this._sa, this._ca, this._ccw);
             dc.stroke();
@@ -1034,7 +1045,8 @@ const [TG] = (function () {
                         style: [
                             turtle._penDown,
                             turtle._penSize,
-                            [...turtle._penDash],
+                            [...turtle._dash],
+                            turtle._dashOffset,
                             turtle._penCap,
                             turtle._penColor,
                             turtle._fillColor,
@@ -1060,7 +1072,8 @@ const [TG] = (function () {
                             [
                                 turtle._penDown,
                                 turtle._penSize,
-                                turtle._penDash,
+                                turtle._dash,
+                                turtle._dashOffset,
                                 turtle._penCap,
                                 turtle._penColor,
                                 turtle._fillColor,
@@ -1184,7 +1197,8 @@ const [TG] = (function () {
             this.recordManager(turtle);
             [this._fillStyle, this._strokeStyle, this._lineWidth, this._penDown] =
                 [turtle._fillColor, turtle._penColor, turtle._penSize, turtle._penDown];
-            [this._lineDash, this._lineCap] = [turtle._penDash, Symbol.keyFor(turtle._penCap)];
+            [this._lineDash, this._lineCap] = [turtle._dash, Symbol.keyFor(turtle._penCap)];
+            this._lineDashOffset = turtle._dashOffset;
             this._pts = turtle._fill_points;
             if (this._close && this._pts.length > 0) {
                 this._pts.push(['lineTo', turtle._penDown ? 'lineTo' : 'moveTo',
@@ -1206,6 +1220,7 @@ const [TG] = (function () {
             dc.translate(offX / 2, offY / 2)
             dc.fillStyle = this._fillStyle;
             dc.strokeStyle = this._strokeStyle;
+            dc.lineDashOffset = this._lineDashOffset;
             dc.lineWidth = this._lineWidth;
             dc.lineCap = this._lineCap;
             let pts = [...this._pts];
@@ -1219,6 +1234,7 @@ const [TG] = (function () {
                 pts = [...this._pts];
                 dc.beginPath();
                 dc.setLineDash(this._lineDash);
+                dc.lineDashOffset = this._lineDashOffset;
                 while (pts.length > 0) {
                     let p = pts.shift();
                     dc[p[1]](...p.slice(2));
@@ -1338,8 +1354,8 @@ const [TG] = (function () {
     class Attribute extends Task {
         constructor(...info) {
             super(...info);
-            this._attr = info[0];   // name of turle atttribute 
-            this._value = info[1];  // value
+            this._attr = info[0];   // atttribute name 
+            this._value = info[1];  // atttribute value
         }
 
         perform(turtle, time) {

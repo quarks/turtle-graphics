@@ -4,6 +4,8 @@ V0.9.1
     First release
 
 V0.9.2
+    Line dash offset attribute added. See dash() method for details.
+    
     Introduced new text alinment constants (LT, CT, RT, JT). The first
     three can be used as alternatives (not replacements) to the 'left', 
     'center' and 'right' values used in V0.9.1 so they can be used 

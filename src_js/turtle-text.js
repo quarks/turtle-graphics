@@ -11,55 +11,10 @@ User guide: http://www.lagers.org.uk/tg/guide/guide.html
 
 "use strict";
 
-const [format, addText, length] = (function tt() {
+const [format, addText, length] = (function () {
     const { PI, atan, min, sqrt } = Math;
     const r2d = 180 / PI;
     const m = new Map();
-
-    // Returns a 'format' object used to describe how the text is to
-    // be displayed.
-    function format(pensize = 8, height = 80, scale = 1,
-        leading = 0, kerning = 0) {
-        return {
-            pensize: pensize, height: height, scale: scale, leading: leading,
-            kerning: kerning, align: LT, line_width: undefined
-        };
-    }
-
-    // Adds the tasks needed for the turtle to draw the text based on the 
-    // fmt parameter.
-    function addText(t, text, fmt = format()) {
-        let { pensize, height, scale, leading, kerning, align, line_width } = fmt;
-        let paras = getParagraphs(text), lines = [];
-        if (line_width)
-            paras.forEach(p => lines.push(...paraToLines(p, fmt)));
-        else
-            paras.forEach(p => lines.push(p.trimEnd()));
-        lines.forEach(line => {
-            let [len, nbr_spaces] = getAlignData(line, fmt);
-            let inset = 0, inter = 0;
-            switch (align) {
-                case RT: inset = line_width - len; break;
-                case CT: inset = (line_width - len) / 2; break;
-                case JT: if (len / line_width >= 0.8) inter = (line_width - len) / nbr_spaces; break;
-            }
-            t.pu().dxy(0, height + leading).f(0).push_pen().dxy(0, -height - leading)
-                .dxy(inset, 0);
-            for (let i = 0; i < line.length; i++) {
-                let ch = m.get(line.charAt(i));
-                if (ch) {
-                    addCharacterBox(t, ch.w, fmt);
-                    ch.f(t, pensize, height / 10, ch.w, scale, pensize * scale);
-                    t.dxy(kerning, 0);
-                    if (ch.isSpace) t.dxy(inter, 0);
-                }
-            }
-            t.pop_pen();
-
-        });
-        return t;
-    }
-
 
     // ##################################################################
     //  Turtle drawing code for ASCII characters
@@ -793,9 +748,9 @@ const [format, addText, length] = (function tt() {
 
     /* Convert user supplied text into an array of paragraphs */
     function getParagraphs(text) {
-        let paras = [];
-        text = Array.isArray(text) ? text : [text];
-        text.forEach(e => paras.push(...e.split('\n')));
+        let paras = [], temp = [];
+        Array.isArray(text) ? temp.push(...text) : temp.push(text);
+        temp.forEach(e => paras.push(...e.split('\n')));
         return paras;
     }
 
@@ -805,7 +760,7 @@ const [format, addText, length] = (function tt() {
         para = para.trimEnd();
         let lines = [], line, len = 0, start = 0, idx = 0, spaceAt = 0;
         while (idx < para.length) {
-            let ch = m.get(text.charAt(idx));
+            let ch = m.get(para.charAt(idx));
             if (ch) {
                 len += (ch.w * pensize * scale) + kerning;
                 if (len < line_width) {
@@ -831,7 +786,7 @@ const [format, addText, length] = (function tt() {
         return lines;
     }
 
-    /* Get the line pixel length and the number of spaces */
+    // Get the line pixel length and the number of spaces
     function getAlignData(line, fmt) {
         let { pensize, scale, kerning } = fmt;
         let len = 0, spaces = 0;
@@ -845,18 +800,71 @@ const [format, addText, length] = (function tt() {
         return [len, spaces];
     }
 
-    function length(text, fmt) {
-        text = text.replaceAll('\n', '');
-        return getAlignData(text, fmt)[0];
-    }
-
-    function addCharacterBox(t, cw, fmt) {
-        let { pensize, height, scale } = fmt;
+    function addCharFrame(t, cw, fmt) {
+        let { pensize, height, scale, frame_col } = fmt;
         let ah = 0.7 * height, ad = 0.3 * height, pw = pensize * cw * scale;
-        t.push_pen().animateoff().pd().f(0).pensize(1).pencolor('red')
+        t.push_pen().animateoff().pd().f(0).pensize(1).pencolor(frame_col)
             .fd(pw).lt(90).fd(ah).lt(90).fd(pw).lt(90).fd(height).lt(90)
             .fd(pw).lt(90).fd(ad).pop_pen();
         return t;
+    }
+
+    // ##################################################################
+    //  User available functions
+    // ##################################################################
+
+    // Returns a 'format' object used to describe how the text is to
+    // be displayed.
+    function format(
+        height = 80, pensize = 8, scale = 1, align = LT,
+        kerning = 0, leading = 0, line_width = 0,
+        frame_on = false, frame_col = 'pink') {
+        return {
+            height: height, pensize: pensize, scale: scale, align: align,
+            kerning: kerning, leading: leading, line_width: line_width,
+            frame_on: frame_on, frame_col: frame_col
+        };
+    }
+
+    // Adds the tasks needed for the turtle to draw the text based on the 
+    // fmt parameter.
+    function addText(t, text, fmt = format()) {
+        let { pensize, height, scale, leading, kerning, align, line_width,
+            frame_on } = fmt;
+        let paras = getParagraphs(text), lines = [];
+        if (line_width > 0)
+            paras.forEach(p => lines.push(...paraToLines(p, fmt)));
+        else
+            paras.forEach(p => lines.push(p.trimEnd()));
+        for (let ln = 0; ln < lines.length; ln++) {
+            let line = lines[ln], last = ln == lines.length - 1;
+            let [len, nbr_spaces] = getAlignData(line, fmt);
+            let inset = 0, inter = 0;
+            switch (align) {
+                case RT: inset = line_width - len; break;
+                case CT: inset = (line_width - len) / 2; break;
+                case JT: if (!last && (len / line_width >= 0.75 && nbr_spaces > 2))
+                    inter = (line_width - len) / nbr_spaces;
+                    break;
+            }
+            t.pu().dxy(0, height + leading).f(0).push_pen()
+                .dxy(0, -height - leading).dxy(inset, 0);
+            for (let i = 0; i < line.length; i++) {
+                let ch = m.get(line.charAt(i));
+                if (ch) {
+                    if (frame_on) addCharFrame(t, ch.w, fmt);
+                    ch.f(t, pensize, height / 10, ch.w, scale, pensize * scale);
+                    t.dxy(kerning, 0);
+                    if (ch.isSpace) t.dxy(inter, 0);
+                }
+            }
+            t.pop_pen();
+        }
+        return t.pd();
+    }
+
+    function length(text, fmt) {
+        return getAlignData(text.replaceAll('\n', ''), fmt)[0];
     }
 
     return [format, addText, length];

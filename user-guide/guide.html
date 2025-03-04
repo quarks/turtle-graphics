@@ -24,16 +24,16 @@
   <main class="d-flex flex-nowrap">
     <div class="col-2 flex-shrink-0 p-3 scrollarea">
 
-      <!-- ####################################################
-           ############### TURTLE GRAPHICS   ##################
-           ####################################################
+      <!--  ####################################################
+            ############### TURTLE GRAPHICS   ##################
+            ####################################################
       -->
 
-      <a href="https://github.com/quarks/turtle-graphics" target="_blank"
-        class="d-flex align-items-center pb-3 link-body-emphasis text-decoration-none">
-        <span class="fs-4 fw-semibold">Turtle Graphics</span>
+      <a href="https://github.com/quarks/turtle-graphics/wiki" target="_blank"
+        class="d-flex align-items-center pb-2 link-body-emphasis text-decoration-none">
+        <span class="fs-3 fw-semibold">Turtle Graphics</span>
       </a>
-      <div class="b-divider b-hr mb-3" style="height: 0.25rem;"></div>
+      <div class="b-divider b-hr mb-2" style="height: 0.3rem;"></div>
 
       <!--  ############### Introduction   -->
       <ul class="list-unstyled ps-0">
@@ -213,7 +213,7 @@
         <!-- ####################################################
              ###########   TURTLE ATTRIBUTES   ##################
              ####################################################
-             -->
+        -->
 
         <span class="fs-5 fw-semibold">Turtle Attributes</span>
         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
@@ -389,8 +389,42 @@
             </ul>
           </div>
         </li>
-        <div class="b-divider b-hr "></div>
-    </div>
+        <div class="b-divider b-hr mb-1" style="height: 0.5rem;"></div>
+
+        <!--  ####################################################
+              #################   TURTLE TEXT   ##################
+              ####################################################
+        -->
+
+        <a href="https://github.com/quarks/turtle-graphics/wiki" target="_blank"
+          class="d-flex align-items-center pb-2 link-body-emphasis text-decoration-none">
+          <span class="fs-3 fw-semibold">Turtle Text</span>
+        </a>
+        <div class="b-divider b-hr mb-2" style="height: 0.3rem;"></div>
+
+
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a href="#tt-about" class="idx-text-link">Overview</a></li>
+        </ul>
+
+        <!--  ############### Methods   -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#tt-methods-collapse" aria-expanded="false">
+            Text methods
+          </button>
+          <div class="collapse" id="tt-methods-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#tt-format" class="idx-code-link">format()</a></li>
+              <li><a href="#tt-addtext" class="idx-code-link">addText()</a></li>
+              <li><a href="#tt-length" class="idx-code-link">length()</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <div class="b-divider b-hr"></div>
+
+    </div> <!-- end of scrollable pane  -->
 
     <div class="b-divider b-vr "></div>
 
@@ -755,13 +789,14 @@
       <div class="b-divider b-hr "></div>
 
       <p id="dash" class="ch-code">
-        turtle.dash(pattern[line_len, gap_size ...] : <i>optional</i>)<br>
+        turtle.dash(pattern = [] offset = 0)<br>
       </p>
       <p class="cd-text">
-        The parameter is an array of numbers representing the dash pattern to be used. The numbers are in pairs where
-        the first is the line-length and the second the gap size, addition number pairs can be included to create more
-        complex patterns.
-      </p>
+        The parameter <code>pattern</code> is an array of numbers representing the dash pattern to be used. The numbers
+        are in pairs where the first is the line-length and the second the gap size, addition number pairs can be
+        included to create more complex patterns. The second parameter <code>offset</code> is the pixel start position
+        in the pattern. </p>
+      <p class="cd-text">If <code>pattern</code> is an empty array or not provided then line dash is turned off.</p>
       <figure class="text-center">
         <img src="dash.png" class="figure-img img-fluid rounded" alt="shows line dash examples">
         <figcaption class="figure-caption text-center">Line dash examples.</figcaption>
@@ -1073,7 +1108,7 @@
       <p class="cd-code">turtle.start();</p>
       <div class="b-divider b-hr "></div>
 
-      <div class="row ms-0 ch-section-100 container-fluid">
+      <div id="modes" class="row ms-0 ch-section-100 container-fluid">
         <div class="col-1 ch-section-left ">
           <p>CORE SETTINGS</p>
         </div>
@@ -1648,10 +1683,9 @@
       <div class="b-divider b-hr "></div>
 
 
-      <p id="interval" class="ch-code">turtle.setUpdateInterval()<br> </p>
+      <p id="interval" class="ch-code">turtle.setUpdateInterval(interval)<br> </p>
       <p class="cd-text">The turtle&apos;s state is updated every 25 milliseconds (default value). In most cases this
-        is
-        perfectly adequate but if the application has a lot of turtles it may improve performance if the interval is
+        is perfectly adequate but if the application has a lot of turtles it may improve performance if the interval is
         increased. </p>
       <p class="cd-text">The animation speed is independant of the update interval but my appear jerky at high
         intervals.</p>
@@ -1660,6 +1694,143 @@
       <p id="spawn" class="ch-code">turtle.spawn()<br> </p>
       <p class="cd-text">
         Returns a duplicate of this turtle.</p>
+      <div class="b-divider b-hr "></div>
+
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@   TURTLE TEXT   @@@@@@@@@@@@@@@@@@@@
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      -->
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE TEXT</p>
+        </div>
+        <div id="tt-about" class="col-10 ch-section-right">
+          <p>Overview</p>
+        </div>
+      </div>
+      <p class="cd-text">TT can only draw the printable characters in the ASCII set as shown in this table -</p>
+      <figure class="text-center">
+        <img src="ascii.png" class="figure-img img-fluid rounded" alt="ascii table of printable characters">
+        <figcaption class="figure-caption text-center">ASCII table of printable characters</figcaption>
+      </figure>
+      <p class="cd-text">Although Turtle Text only has a single font-face and proportional-width characters it does
+        allow great
+        control over how the text is displayed -</p>
+      <ul class="cd-ul">
+        <li class="cd-li"><b>Font height:</b></li>
+        <li class="cd-li"><b>Font weight:</b> the pensize.</li>
+        <li class="cd-li"><b>Scale:</b> the character width depends on the pensize and is independant of the font
+          height. The scale enables greater control of the charecter aspect ratio.</li>
+        <li class="cd-li"><b>Kerning:</b> the horizontal spacing between adjacent characters in the text.</li>
+        <li class="cd-li"><b>Leading:</b> the vertical space between lines of text. The vertical distance between two
+          lines of text is the font height + leading.</li>
+        <li class="cd-li"><b>Line width:</b> if specified it is the maximum horizontal space for displaying the text.
+          Text that does not fit will automatically be split into multiple lines.</li>
+        <li class="cd-li"><b>Align:</b> if a line width has been specified then the text can be left aligned, right
+          aligned, centred or justified.</li>
+      </ul>
+      <p class="cd-text">All these settings must be encapsulated in a format object. Use the <code>format(...)</code>
+        method to instantiate a format object that will be used to draw the text.
+      </p>
+      <div class="b-divider b-hr "></div>
+      <div class="row ms-0 ch-section-100 container-fluid">
+        <div class="col-1 ch-section-left ">
+          <p>TURTLE TEXT</p>
+        </div>
+        <div class="col-10 ch-section-right">
+          <p>Text methods</p>
+        </div>
+      </div>
+
+
+      <p id="tt-format" class="ch-code">
+        format(height = 80, pensize = 8, scale = 1, align = LT,
+        kerning = 0, leading = 0, line_width = 0,
+        frame_on = false, frame_col = 'pink')<br> </p>
+
+      <div class="ms-5 col-lg-10">
+        <table class="table table-bordered border border-dark">
+          <thead>
+            <tr class=" table-secondary border border-dark ">
+              <th class="col-lg-1" scope="col">Parameter</th>
+              <th class="col-lg-1" scope="col">Default Value</th>
+              <th class="col-lg-8" scope="col">Description Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">height</th>
+              <td>80</td>
+              <td>The font height in pixels.</td>
+            </tr>
+            <tr>
+              <th scope="row">pensize</th>
+              <td>8</td>
+              <td>The width (pixels) of the lines representing the character.</td>
+            </tr>
+            <tr>
+              <th scope="row">scale</th>
+              <td>1</td>
+              <td>Scales the width of the character.</td>
+            </tr>
+            <tr>
+              <th scope="row">align</th>
+              <td>LT</td>
+              <td>Text is left aligned (LT) by default but if the line width parameter id &gt; 0 then the alignment cane
+                be right (RT), centered (CT) or justified (JT).</td>
+            </tr>
+            <tr>
+              <th scope="row">kerning</th>
+              <td>0</td>
+              <td>The inter-character spacing in pixels.</td>
+            </tr>
+            <tr>
+              <th scope="row">leading</th>
+              <td>0</td>
+              <td>The inter-line spacing in pixels.</td>
+            </tr>
+            <tr>
+              <th scope="row">line_width</th>
+              <td>0</td>
+              <td>The screen width used to display the text. If &gt;0 then the text will be split and aligned to fit the
+                line width.</td>
+            </tr>
+            <tr>
+              <th scope="row">frame_on</th>
+              <td>false</td>
+              <td>If set to <code>true</code> then each character is framed to show its visual extent.</td>
+            </tr>
+            <tr>
+              <th scope="row">frame_col</th>
+              <td>'pink'</td>
+              <td>The frame color.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cd-text"> This method returns a format object using any supplied parameter values. The default values
+        will be used for any undefined parameters.</p>
+      <p class="cd-text">The following code creates a format object with a font height of 60 and pen size of 6 pixels.
+        All other attributes will be set to their default values. It then sets a line width of 500 pixels and lustified
+        text.</p>
+      <p class="cd-code">
+        let fmt = format(60, 6); <br>
+        fmt.line_width = 500; <br>
+        fmt.align = JT; <br>
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="tt-addtext" class="ch-code">addText(text, fmt)<br> </p>
+      <p class="cd-text">
+        The <code>text</code> parameter can be either a string or an array of strings. Any string containing the
+        carriage return character (<code>\n</code>) will be split into separate strings. Every string will be treated as
+        a paragrapgh. The second parameter <code>fmt</code> is the format object used to display the text.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="tt-length" class="ch-code">length(text, fmt)<br> </p>
+      <p class="cd-text">The <code>text</code> parameter is a simple string variable and the method returns the length
+        of the string in pixels based on the format object parameter. Any carriage return characters (<code>\n</code>)
+        will be ignored.</p>
       <div class="b-divider b-hr "></div>
 
       <!--  End of content -->
