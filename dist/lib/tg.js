@@ -1,12 +1,12 @@
  /**
  * @preserve Turtle-Graphics    (c) Peter Lager  2025
  * @license MIT
- * @version 0.9.2
+ * @version Working copy use latest stable version instead
  */
 /*
             Turtle Graphics
 
-Version:    0.9.2
+Version:    Working copy use latest stable version instead
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 
