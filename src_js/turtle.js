@@ -20,7 +20,7 @@ const [STYLE, POS, STYLE_POS] = [1, 2, 3];
 const [LT, CT, RT, JT] = [-1, 0, 1, 2]; // DO NOT CHANGE
 
 const [TG] = (function () {
-    const { PI, abs, atan2, ceil, cos, max, sign, sin, sqrt } = Math;
+    const { PI, abs, atan2, ceil, cos, max, sign, sin, sqrt, atan } = Math;
     const [HALF_PI, TAU] = [Math.PI / 2, Math.PI * 2];
     const radToDeg = (rads) => (rads * 180 / PI);
     const degToRad = (degs) => (degs * PI / 180);
@@ -142,6 +142,10 @@ const [TG] = (function () {
         bk(d) { return this._addTask(new Move(d, BACKWARD)); }
         backward(d) { return this.bk(d); }
         back(d) { return this.bk(d); }
+
+        bend(d, h, side = RT, keepHead = true, steps = 0) {
+            return this._addTask(new Bend(d, h, side, keepHead, ceil(steps)));
+        }
 
         lt(a) { return this._addTask(new Turn(this._fix(a), LT)); }
         left(a) { return this.lt(a); }
@@ -335,7 +339,6 @@ const [TG] = (function () {
 
         setDash(dash = []) {
             if (Array.isArray(dash)) this._dash = dash;
-            // this._dash = Array.isArray(dash) ? [...dash] : [];
             return this;
         }
         getDash() { return this._dash; }
@@ -584,8 +587,8 @@ const [TG] = (function () {
     class Turn extends Task {
         constructor(...info) {
             super(...info);
-            this._ang = info[0];
-            this._dir = info[1]; // 1 = Right : -1 = Left : 0 = Nearest
+            this._ang = info[0];    // Radians in range 0 - TAU
+            this._dir = info[1];    // 1 = Right : -1 = Left : 0 = Nearest
             this.setWAITING();
         }
 
@@ -718,6 +721,67 @@ const [TG] = (function () {
             dc.restore();
         }
     }   // End of Move class
+
+    class Bend extends Task {
+        constructor(...info) {
+            super(...info);
+            this._d = info[0];          // the forward distance to move
+            this._h = info[1];          // the amount to bend 
+            this._side = info[2];       // side to bend movement
+            this._keepHead = info[3];   // keep original heading
+            this._steps = info[4];      // nbr steps
+            this.setWAITING();
+        }
+
+        init(turtle) {
+            let d = this._d, h = this._h, side = this._side;
+            let x0 = turtle._penX, y0 = turtle._penY, a = turtle._penA;
+            // Calulate destination
+            let x1 = x0 + d * cos(a), y1 = y0 + d * sin(a);
+            // Calculate mid point to destination
+            let mX = (x0 + x1) / 2, mY = (y0 + y1) / 2;
+            // Calculate normal vector pointing to arc center
+            let len = distance(x0, y0, x1, y1);
+            let perpX = -(y1 - y0) / len, perpY = (x1 - x0) / len;
+            // Calculate arc radius and angle (extent)
+            let scl = d / 2; // semi chord len
+            let radius = (scl * scl / h + h) / 2, r_h = radius - h;
+            let extent = 2 * atan(scl / r_h);
+            if (extent < 0) extent += 2 * PI;
+            // Calculate arc centre
+            let acX = mX - perpX * side * r_h;
+            let acY = mY - perpY * side * r_h;
+            // Calculate start and start heading angles
+            let startAng = atan2(y0 - acY, x0 - acX);
+            // These are needed for perfom
+            this._orgHead = a;
+            this._head = normAngle(startAng - side * PI / 2);
+            this._extent = extent;
+            this._radius = radius;
+            this._dir = side == LT ? RT : LT;
+            this.setREADY();
+        }
+
+        perform(turtle, time) {
+            if (this.isWAITING()) this.init(turtle);
+            let tasks = [];
+            if (this._h == 0) {
+                tasks.push(new Move(this._d, FORWARD));
+            }
+            else {
+                tasks.push(new Turn(this._head, NEAREST));
+                if (this._steps == 0)
+                    tasks.push(new Arc(this._radius, this._radius, this._extent, this._dir));
+                else
+                    tasks.push(new Oval(this._radius, this._radius, this._extent, this._dir, this._steps));
+                if (this._keepHead)
+                    tasks.push(new Turn(this._orgHead, NEAREST));
+            }
+            turtle._injectTasks(tasks);
+            this.setDONE();
+            return time;
+        }
+    }   // End of Bend class
 
     class Oval extends Task {
         constructor(...info) {
@@ -1313,7 +1377,6 @@ const [TG] = (function () {
             this._x = info[1];          // x value or undefined
             this._y = info[2];          // y value or undefined
             this._fill_gap = info[3]
-
         }
 
         perform(turtle, time) {
@@ -1403,7 +1466,6 @@ const [TG] = (function () {
             return time;
         }
     }   // End of Snapshot class
-
 
     class Sleep extends Task {
         constructor(...info) {

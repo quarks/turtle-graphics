@@ -74,6 +74,7 @@
               <li><a href="#backward" class="idx-code-link">backward() back() bk()</a></li>
               <li><a href="#left" class="idx-code-link">left() lt()</a></li>
               <li><a href="#right" class="idx-code-link">right() rt()</a></li>
+              <li><a href="#bend" class="idx-code-link">bend()</a></li>
               <li><a href="#heading" class="idx-code-link">heading() head()</a>
               <li><a href="#home" class="idx-code-link">home()</a>
               <li><a href="#goto" class="idx-code-link">goto()</a></li>
@@ -340,6 +341,18 @@
           <div class="collapse" id="attr-colors-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               <li><a href="#colors" class="idx-text-link">Color descriptors</a></li>
+              <li><a href="#rgb" class="idx-code-link">rgb()</a></li>
+              <li><a href="#hsl" class="idx-code-link">hsl()</a></li>
+              <li><a href="#hwb" class="idx-code-link">hwb()</a></li>
+
+              <li><a href="#converters" class="idx-text-link">Conversion between schemes</a></li>
+              <li><a href="#rgb_hsl" class="idx-code-link">rgb_hsl()</a></li>
+              <li><a href="#hsl_rgb" class="idx-code-link">hsl_rgb()</a></li>
+              <li><a href="#rgb_hwb" class="idx-code-link">rgb_hwb()</a></li>
+              <li><a href="#hwb_rgb" class="idx-code-link">hwb_rgb()</a></li>
+
+
+
             </ul>
           </div>
         </li>
@@ -594,9 +607,35 @@
         turtle.rt(ang)<br>
       </p>
       <p class="cd-text">
-        Turn right by the specified angle. The default rotational unit is degrees (&deg;) but chan be changed to
+        Turn right by the specified angle. The default rotational unit is degrees (&deg;) but can be changed to
         <a href="#radians" class="idx-code-link">radians</a>.
       </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="bend" class="ch-code">
+        turtle.bend(d, h, side = RT, keepHead = true, steps = 0)<br>
+      </p>
+      <p class="cd-text">
+        Turtle moves forward but travels in a circular arc.</p>
+      <figure class="text-center">
+        <img src="bend.png" class="figure-img img-fluid rounded" alt="moving forward with a bend">
+        <figcaption class="figure-caption text-center">Move forward with a bend.</figcaption>
+      </figure>
+      <ul class="cd-ul">
+        <li class="cd-li"> <code>d</code> is the distance to move in the current direction of travel (heading).</li>
+        <li class="cd-li"> <code>h</code> is the peek orthoganol distance from the current direction of travel
+          (heading).
+        </li>
+        <li class="cd-li"> <code>side</code> must be either <code>LT</code> or <code>RT</code> and determines
+          which side of the path the turtle travels. The actual visual effect depends on the turtle&apos;s mode.
+        </li>
+        <li class="cd-li"> <code>keepHead</code> determines the turtle&apos;s heading after completing this task. If
+          <code>true</code> the turtle will be heading in the same direction before the bend was performed (blue arrow),
+          if <code>false</code> it will be heading in the arc direction (red arrow).
+        </li>
+        <li class="cd-li"><code>steps</code> if =0 then the path will be smooth. If &gt;0 then each 'step' along the
+          path is a chord of the circlular arc. </li>
+      </ul>
       <div class="b-divider b-hr "></div>
 
       <p id="heading" class="ch-code">
@@ -688,14 +727,13 @@
         <li class="cd-li"> <code>rad_b</code> is the radius orthoganol to the current direction of travel (heading).
         </li>
         <li class="cd-li"> <code>extent</code> the angle to be subtended by the turtle. A full circle / oval is drawn
-          if
-          the extent is 360&deg; or 2&pi; radians.</li>
+          if the extent is 360&deg; or 2&pi; radians.</li>
         <li class="cd-li"> <code>turnDir</code> must be either <code>LT</code> or <code>RT</code> and determines
-          whether
-          the turtle turns to the left or to the right. The actual visual effect depends on the turtle&apos;s mode.
+          whether the turtle turns to the left or to the right. The actual visual effect depends on the turtle&apos;s
+          mode.
         </li>
         <li class="cd-li"><code>steps</code> if =0 then the path will be smooth. If &gt;0 then each 'step' along the
-          path is a chord or the circle / oval. </li>
+          path is a chord of the circle / oval. </li>
       </ul>
       <p class="cd-text">The turtle paths shown in the picture above were created with the following code -</p>
       <p class="cd-code">
@@ -1386,10 +1424,8 @@
       </div>
       <p id="getpoly" class="ch-code">turtle.getPoly(id)<br> </p>
       <p class="cd-text">Get the vertices for a recorded polygon with the specified <code>id</code>. The points will
-        be
-        transformed to DISPLAY mode coordinates irrespective of the turtle&apos;s mode so they correspond to the
-        vertex
-        positions as displayed on the computer screen. </p>
+        be transformed to DISPLAY mode coordinates irrespective of the turtle&apos;s mode so they correspond to the
+        vertex positions as displayed on the computer screen. </p>
       <p class="cd-text">The vertices are are stored in an array of tuples:-<br>
         <code>[ [x<sub>0</sub>, y<sub>0</sub>], [x<sub>1</sub>, y<sub>1</sub>], [x<sub>2</sub>, y<sub>2</sub>], ... &nbsp; ]</code>
       </p>
@@ -1502,8 +1538,7 @@
       <p class="cd-text"><b>WEIGHT</b> - any value in the range 1 and 1000 inclusive is valid but it is usually a
         multiple of 100. Normal weight is 400 and bold 700.</p>
       <p class="cd-text"><b>STYLE</b> - If not included in the descriptor then plain text is used. Valid values
-        include
-        'italic' and ' oblique' both have the effect of making the text lean to the right.</p>
+        include 'italic' and ' oblique' both have the effect of making the text lean to the right.</p>
       <p class="cd-text"><b>SIZE</b> - This is the font size, examples include 12px 40em ...</p>
       <p class="cd-text"><b>FAMILY_NAME</b> - There are two types of font family names:</p>
       <ul class="cd-ul">
@@ -1551,8 +1586,8 @@
         &nbsp;&nbsp;&nbsp;&nbsp;<code>'rgb(r g b)'</code><br>
         &nbsp;&nbsp;&nbsp;&nbsp;<code>'rgb(r g b / a)'</code>
         <li class="cd-li">sHSL : hue, saturation, luminance with optional alpha.</li>
-        &nbsp;&nbsp;&nbsp;&nbsp;<code>'rgb(h s l)'</code><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<code>'rgb(h s l / a)'</code>
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>'hsl(h s l)'</code><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>'hsl(h s l / a)'</code>
         <li class="cd-li">sHWB : hue, whiteness, blackness with optional alpha.</li>
         &nbsp;&nbsp;&nbsp;&nbsp;<code>'hwb(h w b)'</code><br>
         &nbsp;&nbsp;&nbsp;&nbsp;<code>'hwb(h w b / a)'</code>
@@ -1562,40 +1597,54 @@
           <thead>
             <tr class=" table-secondary border border-dark ">
               <th scope="col">Parameters</th>
-              <th scope="col">Valid ranges (inclusive)</th>
+              <th scope="col">Valid numeric ranges</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">r&nbsp;&nbsp;&nbsp;g&nbsp;&nbsp;&nbsp;b</th>
-              <td>0 -> 255&nbsp;&nbsp;&nbsp;&nbsp;<em>or</em>&nbsp;&nbsp;&nbsp;&nbsp;0% -> 100%</td>
+              <td>&ge; 0 and &le; 255 (Integers values only)</td>
             </tr>
             <tr>
               <th scope="row">h</th>
-              <td>0 -> 360</td>
+              <td>&ge; 0.0 and &lt; 360</td>
             </tr>
             <tr>
-              <th scope="row">s&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;w&nbsp;&nbsp;&nbsp;b</th>
-              <td>0 -> 100&nbsp;&nbsp;&nbsp;&nbsp;<em>or</em>&nbsp;&nbsp;&nbsp;&nbsp;0% -> 100%</td>
+              <th scope="row">s&nbsp;&nbsp;&nbsp;l</th>
+              <td>&ge; 0.0 and &le; 100.0</td>
+            </tr>
+            <tr>
+              <th scope="row">w&nbsp;&nbsp;&nbsp;b</th>
+              <td>&ge; 0.0 and &le; 100.0</td>
             </tr>
             <tr>
               <th scope="row">a</th>
-              <td>0.0 -> 1.0&nbsp;&nbsp;&nbsp;&nbsp;<em>or</em>&nbsp;&nbsp;&nbsp;&nbsp;0% -> 100%</td>
+              <td>&ge; 0.0 and &le; 1.0</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="cd-text">Note that the parameters are separated by whitespace and the optional alpha term is separated
-        by a solidus ("/").</p>
-      <p class="cd-text">Valid examples of color descriptors include <code>'rgb(90%&nbsp;95%&nbsp;10%)'</code>,
-        <code>'hsl(330&nbsp;50&nbsp;90 / 0.5)'</code>, <code>'hwb(270&nbsp;20&nbsp;35 / 30%)'</code>
+      <p class="cd-text"><b>Note:</b></p>
+      <ul class="cd-ul">
+        <li>the parameters are separated by whitespace and the optional alpha term is separated
+          by a solidus ("/").</li>
+        <li>all parameters except <code>h</code> (hue) can be passed as a percentage string e.g.
+          <code>'rgb(80%&nbsp;75%&nbsp;33%&nbsp;/&nbsp;50%)'</code>
+        </li>
+        <li>fractional and percentage valus can be used interchangeably so
+          <code>'rgb(80%&nbsp;192&nbsp;32&nbsp;/&nbsp;50%)'</code> is a valid color descriptor.
+        </li>
+      </ul>
+
+
+      <p class="cd-text">Other valid examples of color descriptors include <code>'rgb(230&nbsp;244&nbsp;26)'</code>,
+        <code>'hsl(330&nbsp;50&nbsp;90 / 0.5)'</code>, <code>'hwb(270&nbsp;20&nbsp;35&nbsp;/&nbsp;0.33)'</code>
       </p>
 
       <p class="cd-text"><b>RGB hexadecimal coded:</b></p>
       <p class="cd-text">A color value is created by specifying each channel as a hexadecimal number in the range 00
-        to
-        FF (0 to 255 in decimal) then concatenating them into a string preceeded with a hash (#) i.e. '#RRGGBB'. To
-        include the channel its hexadecimal value must alse be concatenateed i.e. '#RRGGBBAA'</p>
+        to FF (0 to 255 in decimal) then concatenating them into a string preceeded with a hash (#) i.e. '#RRGGBB'. To
+        include the alpha channel its hexadecimal value must also be concatenateed i.e. '#RRGGBBAA'</p>
       <ul class="cd-ul list-unstyled">
         <li class="cd-li"><code>'#FF00FF'</code> : red (255), green (0), blue(255) - purple.</li>
         <li class="cd-li"><code>'#FF00FF20'</code> : red (255), green (0), blue(255), alpha (32) - translucent purple.
@@ -1604,6 +1653,68 @@
       <p class="cd-text"> A full description of RGB hexadecimal code values can be found <a
           href="https://www.w3.org/TR/css-color-4/#hex-notation" target="_blank">here</a>.
       </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="rgb" class="ch-code">rgb(r = 255, g = 255, b = 255, a = 1)<br> </p>
+      <p class="cd-text">Returns the CSS color function descriptor based on the red, green, blue and alpha channels.</p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="hsl" class="ch-code">hsl(h = 0, s = 100, l = 100, a = 1)<br> </p>
+      <p class="cd-text">Returns the CSS color function descriptor based on the hue, saturation and lightness values.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="hwb" class="ch-code">hwb(h = 0, w = 0, b = 0, a = 1)<br> </p>
+      <p class="cd-text">Returns the CSS color function descriptor based on the hue, saturation and lightness values.
+      </p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="converters" class="ch-text">Color scheme conversion functions<br> </p>
+      <p class="cd-text">These functions perform no range checking so returned vales are only valid if the suuplied
+        parameters are in the ranges shown here. If all the parameters are valid then all returned component valeus
+        wittyh be in their correct range.</p>
+      <div class="ms-5 col-lg-5">
+        <table class="table table-bordered border border-dark">
+          <thead>
+            <tr class=" table-secondary border border-dark ">
+              <th scope="col">Parameters</th>
+              <th scope="col">Valid numeric ranges</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">r&nbsp;&nbsp;&nbsp;g&nbsp;&nbsp;&nbsp;b</th>
+              <td>&ge; 0 and &le; 255 (Integers values only)</td>
+            </tr>
+            <tr>
+              <th scope="row">h</th>
+              <td>&ge; 0.0 and &lt; 360</td>
+            </tr>
+            <tr>
+              <th scope="row">s&nbsp;&nbsp;&nbsp;l</th>
+              <td>&ge; 0.0 and &le; 100.0</td>
+            </tr>
+            <tr>
+              <th scope="row">w&nbsp;&nbsp;&nbsp;b</th>
+              <td>&ge; 0.0 and &le; 100.0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p id="rgb_hsl" class="ch-code">rgb_hsl(r, g, b)<br> </p>
+      <p class="cd-text">Returns the hue, saturation and lightness components as an array : <code>[h, s, l]</code></p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="hsl_rgb" class="ch-code">hsl_rgb(h, s, l)<br> </p>
+      <p class="cd-text">Returns the red, green and blue components as an array : <code>[r, g, b]</code></p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="rgb_hwb" class="ch-code">rgb_hwb(r, g, b)<br> </p>
+      <p class="cd-text">Returns the hue, whiteness and blackness components as an array : <code>[h, w, b]</code></p>
+      <div class="b-divider b-hr "></div>
+
+      <p id="hwb_rgb" class="ch-code">hwb_rgb(h, w, b)<br> </p>
+      <p class="cd-text">Returns the red, green and blue components as an array : <code>[r, g, b]</code></p>
       <div class="b-divider b-hr "></div>
 
       <!-- @@@@@@@@@@@@@@    Properties    -->

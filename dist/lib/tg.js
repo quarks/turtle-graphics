@@ -1,12 +1,12 @@
  /**
  * @preserve Turtle-Graphics    (c) Peter Lager  2025
  * @license MIT
- * @version Working copy use latest stable version instead
+ * @version 0.9.3
  */
 /*
             Turtle Graphics
 
-Version:    Working copy use latest stable version instead
+Version:    0.9.3
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 
@@ -25,7 +25,7 @@ const [STYLE, POS, STYLE_POS] = [1, 2, 3];
 const [LT, CT, RT, JT] = [-1, 0, 1, 2]; // DO NOT CHANGE
 
 const [TG] = (function () {
-    const { PI, abs, atan2, ceil, cos, max, sign, sin, sqrt } = Math;
+    const { PI, abs, atan2, ceil, cos, max, sign, sin, sqrt, atan } = Math;
     const [HALF_PI, TAU] = [Math.PI / 2, Math.PI * 2];
     const radToDeg = (rads) => (rads * 180 / PI);
     const degToRad = (degs) => (degs * PI / 180);
@@ -147,6 +147,10 @@ const [TG] = (function () {
         bk(d) { return this._addTask(new Move(d, BACKWARD)); }
         backward(d) { return this.bk(d); }
         back(d) { return this.bk(d); }
+
+        bend(d, h, side = RT, keepHead = true, steps = 0) {
+            return this._addTask(new Bend(d, h, side, keepHead, ceil(steps)));
+        }
 
         lt(a) { return this._addTask(new Turn(this._fix(a), LT)); }
         left(a) { return this.lt(a); }
@@ -340,7 +344,6 @@ const [TG] = (function () {
 
         setDash(dash = []) {
             if (Array.isArray(dash)) this._dash = dash;
-            // this._dash = Array.isArray(dash) ? [...dash] : [];
             return this;
         }
         getDash() { return this._dash; }
@@ -589,8 +592,8 @@ const [TG] = (function () {
     class Turn extends Task {
         constructor(...info) {
             super(...info);
-            this._ang = info[0];
-            this._dir = info[1]; // 1 = Right : -1 = Left : 0 = Nearest
+            this._ang = info[0];    // Radians in range 0 - TAU
+            this._dir = info[1];    // 1 = Right : -1 = Left : 0 = Nearest
             this.setWAITING();
         }
 
@@ -723,6 +726,67 @@ const [TG] = (function () {
             dc.restore();
         }
     }   // End of Move class
+
+    class Bend extends Task {
+        constructor(...info) {
+            super(...info);
+            this._d = info[0];          // the forward distance to move
+            this._h = info[1];          // the amount to bend 
+            this._side = info[2];       // side to bend movement
+            this._keepHead = info[3];   // keep original heading
+            this._steps = info[4];      // nbr steps
+            this.setWAITING();
+        }
+
+        init(turtle) {
+            let d = this._d, h = this._h, side = this._side;
+            let x0 = turtle._penX, y0 = turtle._penY, a = turtle._penA;
+            // Calulate destination
+            let x1 = x0 + d * cos(a), y1 = y0 + d * sin(a);
+            // Calculate mid point to destination
+            let mX = (x0 + x1) / 2, mY = (y0 + y1) / 2;
+            // Calculate normal vector pointing to arc center
+            let len = distance(x0, y0, x1, y1);
+            let perpX = -(y1 - y0) / len, perpY = (x1 - x0) / len;
+            // Calculate arc radius and angle (extent)
+            let scl = d / 2; // semi chord len
+            let radius = (scl * scl / h + h) / 2, r_h = radius - h;
+            let extent = 2 * atan(scl / r_h);
+            if (extent < 0) extent += 2 * PI;
+            // Calculate arc centre
+            let acX = mX - perpX * side * r_h;
+            let acY = mY - perpY * side * r_h;
+            // Calculate start and start heading angles
+            let startAng = atan2(y0 - acY, x0 - acX);
+            // These are needed for perfom
+            this._orgHead = a;
+            this._head = normAngle(startAng - side * PI / 2);
+            this._extent = extent;
+            this._radius = radius;
+            this._dir = side == LT ? RT : LT;
+            this.setREADY();
+        }
+
+        perform(turtle, time) {
+            if (this.isWAITING()) this.init(turtle);
+            let tasks = [];
+            if (this._h == 0) {
+                tasks.push(new Move(this._d, FORWARD));
+            }
+            else {
+                tasks.push(new Turn(this._head, NEAREST));
+                if (this._steps == 0)
+                    tasks.push(new Arc(this._radius, this._radius, this._extent, this._dir));
+                else
+                    tasks.push(new Oval(this._radius, this._radius, this._extent, this._dir, this._steps));
+                if (this._keepHead)
+                    tasks.push(new Turn(this._orgHead, NEAREST));
+            }
+            turtle._injectTasks(tasks);
+            this.setDONE();
+            return time;
+        }
+    }   // End of Bend class
 
     class Oval extends Task {
         constructor(...info) {
@@ -1318,7 +1382,6 @@ const [TG] = (function () {
             this._x = info[1];          // x value or undefined
             this._y = info[2];          // y value or undefined
             this._fill_gap = info[3]
-
         }
 
         perform(turtle, time) {
@@ -1409,7 +1472,6 @@ const [TG] = (function () {
         }
     }   // End of Snapshot class
 
-
     class Sleep extends Task {
         constructor(...info) {
             super(...info);
@@ -1454,7 +1516,7 @@ const [TG] = (function () {
 /*
             Turtle Graphics
 
-Version:    0.9.1
+Version:    0.9.3
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 
@@ -1501,14 +1563,170 @@ function getCursorFromImage(p5image, fx = 0, fy = 0) {
 
 // Create and return a 2D array of size dim0 x dim1 and fill all elements
 // with a defined value.
-const getArray2D = function (dim0 = 1, dim1 = 1, fv = 0) {
+const getArray2D = function (dim0 = 1, dim1 = 1, ffillValue = 0) {
     let a = new Array(dim0);
     for (let i = 0; i < a.length; i++) a[i] = new Array(dim1);
     for (let i = 0; i < a.length; i++)
         for (let j = 0; j < a[i].length; j++)
-            a[i][j] = fv;
+            a[i][j] = ffillValue;
     return a;
 }
+
+const [rgb, hsl, hwb, rgb_hsl, hsl_rgb, rgb_hwb, hwb_rgb] = (function () {
+
+    const rgb = (r = 255, g = 255, b = 255, a = 1) => {
+        return `rgb(${r} ${g} ${b} / ${a})`;
+    }
+
+    const hsl = (h = 0, s = 100, l = 100, a = 1) => {
+        return `hsl(${h} ${s} ${l} / ${a})`;
+    }
+
+    const hwb = (h = 0, w = 70, b = 20, a = 1) => {
+        return `hwb(${h} ${w} ${b} / ${a})`;
+    }
+
+    // ###############################################################################
+    //      color mode conversion from methods taken from
+    //      https://www.w3.org/TR/css-color-4/#color-type 
+    //      and then modified to suit this library
+    // ###############################################################################
+
+    /**
+     * HSL > RGB
+     * @param hue - Hue as degrees 0..360
+     * @param sat - Saturation in reference range [0,100]
+     * @param  light - Lightness in reference range [0,100]
+     * @return Array of RGB components 0..255
+     */
+    const hsl_rgb = function (hue, sat, light) {
+        function f(n) {
+            let k = (n + hue / 30) % 12;
+            let a = sat * Math.min(light, 1 - light);
+            return light - a * Math.max(-1, Math.min(k - 3, 9 - k, 1));
+        }
+        hue = hue % 360;
+        if (hue < 0) { hue += 360; }
+        sat /= 100; light /= 100;
+        let rgb = [f(0), f(8), f(4)];
+        rgb.forEach(function (v, i, a) { a[i] = v == 1 ? 255 : Math.floor(v * 256); });
+        return rgb;
+    }
+
+    /**
+     * RGB > HSL
+     * @param  red - Red component 0..255
+     * @param  green - Green component 0..255
+     * @param  blue - Blue component 0..255
+     * @return  Array of HSL values: Hue as degrees 0..360, Saturation and Lightness in reference range [0,100]
+     */
+    const rgb_hsl = function (red, green, blue) {
+        red /= 255; green /= 255; blue /= 255;
+        let max = Math.max(red, green, blue);
+        let min = Math.min(red, green, blue);
+        let [hue, sat, light] = [NaN, 0, (min + max) / 2];
+        let d = max - min;
+
+        if (d !== 0) {
+            sat = (light === 0 || light === 1)
+                ? 0 : (max - light) / Math.min(light, 1 - light);
+            switch (max) {
+                case red: hue = (green - blue) / d + (green < blue ? 6 : 0); break;
+                case green: hue = (blue - red) / d + 2; break;
+                case blue: hue = (red - green) / d + 4;
+            }
+            hue = hue * 60;
+        }
+
+        // Very out of gamut colors can produce negative saturation
+        // If so, just rotate the hue by 180 and use a positive saturation
+        // see https://github.com/w3c/csswg-drafts/issues/9222
+        if (sat < 0) {
+            hue += 180;
+            sat = Math.abs(sat);
+        }
+
+        if (hue >= 360) { hue -= 360; }
+
+        return [hue, sat * 100, light * 100];
+    }
+
+    /**
+     * HWB > RGB
+     * @param  hue -  Hue as degrees 0..360
+     * @param  white -  Whiteness in reference range [0,100]
+     * @param  black -  Blackness in reference range [0,100]
+     * @return  Array of RGB components 0..255
+     */
+    const hwb_rgb = function (hue, white, black) {
+        white /= 100; black /= 100;
+        if (white + black >= 1) {
+            let gray = white / (white + black);
+            return [gray, gray, gray];
+        }
+
+        let rgb = hsl_rgb(hue, 100, 50); rgb[1] /= 255; rgb[2] /= 255;
+        for (let i = 0; i < 3; i++) {
+            rgb[i] *= (1 - white - black);
+            rgb[i] += white;
+        }
+        rgb.forEach(function (v, i, a) { a[i] = v == 1 ? 255 : Math.floor(v * 256); });
+        return rgb;
+    }
+
+    /**
+     * RGB > HWB
+     * @param  red - Red component 0..255
+     * @param  green - Green component 0..255
+     * @param  blue - Blue component 0..255
+     * @return  Array of HWB values: Hue as degrees 0..360, Whiteness and Blackness in reference range [0,100]
+     */
+    const rgb_hwb = function (red, green, blue) {
+        red /= 255; green /= 255; blue /= 255;
+        let hsl = rgb_hsl(red, green, blue);
+        let white = Math.min(red, green, blue);
+        let black = 1 - Math.max(red, green, blue);
+        return ([hsl[0], white * 100, black * 100]);
+    }
+
+    return [rgb, hsl, hwb, rgb_hsl, hsl_rgb, rgb_hwb, hwb_rgb];
+}());
+
+// ###############################################################################
+//      debug support functions
+// ###############################################################################
+const dp0$ = Intl.NumberFormat(undefined, {
+    useGrouping: false,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+}).format;
+
+const dp1$ = Intl.NumberFormat(undefined, {
+    useGrouping: false,
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1
+}).format;
+
+const dp3$ = Intl.NumberFormat(undefined, {
+    useGrouping: false,
+    minimumFractionDigits: 3,
+    maximumFractionDigits: 3
+}).format;
+
+const deg1$ = function (rads) {
+    return dp1$(rads * 360 / Math.PI);
+}
+
+function printPoly(turtle, polyid) {
+    let poly = turtle.getPoly(polyid);
+    console.log('-----------------------------------------------------------------')
+    console.log(`MODE: ${turtle.getMode()}         Nbr. Points ${poly?.length ?? 0}`);
+    poly?.forEach(v => {
+        console.log(`  [${dp0$(v[0])}, ${dp0$(v[1])}]`)
+    });
+}
+
+
 /*
             Turtle Graphics
 
