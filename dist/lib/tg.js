@@ -1,12 +1,12 @@
  /**
  * @preserve Turtle-Graphics    (c) Peter Lager  2025
  * @license MIT
- * @version 0.9.3
+ * @version 1.0.0
  */
 /*
             Turtle Graphics
 
-Version:    0.9.3
+Version:    1.0.0
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 
@@ -1516,7 +1516,7 @@ const [TG] = (function () {
 /*
             Turtle Graphics
 
-Version:    0.9.3
+Version:    1.0.0
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 

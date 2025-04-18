@@ -1,13 +1,13 @@
  /**
  * @preserve Turtle-Text    (c) Peter Lager  2025
  * @license MIT
- * @version 0.9
+ * @version 1.0.0
  */
  
 /*
             Turtle Text
 
-Version:    0.9
+Version:    1.0.0
 Licences:   MIT
 Copyright:  Peter Lager 2025
             <quark(at)lagers.org.uk> 
