@@ -787,7 +787,7 @@ const [format, addText, length] = (function () {
                 }
             }
         }
-        if (start < para.length - 1)
+        if (start < para.length)
             lines.push(para.substring(start, para.length));
         return lines;
     }
